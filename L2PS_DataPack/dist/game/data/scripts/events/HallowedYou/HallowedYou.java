@@ -25,38 +25,92 @@ import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 
 /**
- * @Fixed by L2Ps Team
- * www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class HallowedYou extends Quest
 {
-	private static final String qn = "HallowedYou";
-
 	private static final int HALLOWEN_NPC = 504;
 	private static final int GHOST = 505;
 	
-	private static final int[] ForestOfDeadNight = 
+	private static final int[] ForestOfDeadNight =
 	{
-		18119,21547,21553,21557,21559,21561,21563,21565,21567,21570,
-		21572,21574,21578,21580,21581,21583,21587,21590,21593,21596,
+		18119,
+		21547,
+		21553,
+		21557,
+		21559,
+		21561,
+		21563,
+		21565,
+		21567,
+		21570,
+		21572,
+		21574,
+		21578,
+		21580,
+		21581,
+		21583,
+		21587,
+		21590,
+		21593,
+		21596,
 		21599
 	};
-    private static final int[] TheCementary = 
-    {
-    	20666,20668,20669,20678,20997,20998,20999,21000
+	private static final int[] TheCementary =
+	{
+		20666,
+		20668,
+		20669,
+		20678,
+		20997,
+		20998,
+		20999,
+		21000
 	};
-    private static final int[] ImperialTomb = 
-    {
-    	21396,21397,21398,21399,21400,21401,21402,21403,21404,21405,
-		21406,21407,21408,21409,21410,21411,21412,21413,21414,21415,
-		21416,21417,21418,21419,21420,21421,21422,21423,21424,21425,
-		21426,21427,21428,21429,21430,21431
-	};    	
+	private static final int[] ImperialTomb =
+	{
+		21396,
+		21397,
+		21398,
+		21399,
+		21400,
+		21401,
+		21402,
+		21403,
+		21404,
+		21405,
+		21406,
+		21407,
+		21408,
+		21409,
+		21410,
+		21411,
+		21412,
+		21413,
+		21414,
+		21415,
+		21416,
+		21417,
+		21418,
+		21419,
+		21420,
+		21421,
+		21422,
+		21423,
+		21424,
+		21425,
+		21426,
+		21427,
+		21428,
+		21429,
+		21430,
+		21431
+	};
 	
 	@Override
 	public final String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -73,71 +127,72 @@ public class HallowedYou extends Quest
 		}
 		return htmltext;
 	}
+	
 	@Override
-	public final String onAdvEvent (String event, L2Npc npc, L2PcInstance player)
+	public final String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
 		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
-			st = newQuestState(player);	
+			st = newQuestState(player);
 		}
 		String htmltext = "";
 		if (event.equalsIgnoreCase("getprizes"))
 		{
-			htmltext = "prize.htm";			
-		}		
+			htmltext = "prize.htm";
+		}
 		if (event.equalsIgnoreCase("info"))
 		{
 			htmltext = "info.htm";
 		}
-       	return htmltext;
+		return htmltext;
 	}
 	
 	@Override
-	public final String onKill(L2Npc npc,L2PcInstance player, boolean isPet)
+	public final String onKill(L2Npc npc, L2PcInstance player, boolean isPet)
 	{
 		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
-			st = newQuestState(player);	
+			st = newQuestState(player);
 		}
 		int npcId = npc.getNpcId();
-		for (int Id: ForestOfDeadNight)
-		{ 
+		for (int Id : ForestOfDeadNight)
+		{
 			if (npcId == Id)
 			{
-				spawnGhost(npc,player);
+				spawnGhost(npc, player);
 			}
 		}
-		for (int Id: TheCementary)
-		{ 
+		for (int Id : TheCementary)
+		{
 			if (npcId == Id)
 			{
-				spawnGhost(npc,player);
+				spawnGhost(npc, player);
 			}
 		}
-		for (int Id: ImperialTomb)
-		{ 
+		for (int Id : ImperialTomb)
+		{
 			if (npcId == Id)
 			{
-				spawnGhost(npc,player);
+				spawnGhost(npc, player);
 			}
 		}
 		if (npcId == GHOST)
 		{
-			st.giveItems(FunEvents.HALLOWEEN_CANDY, 1);			
+			st.giveItems(FunEvents.HALLOWEEN_CANDY, 1);
 		}
 		return super.onKill(npc, player, isPet);
 	}
 	
-	private void spawnGhost(L2Npc npc, L2PcInstance player) 
+	private void spawnGhost(L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		int npcId = npc.getNpcId();
 		if (FunEvents.HY_ACTIVE_DROP)
 		{
-			L2Attackable newNpc;		
-			for (int id: ForestOfDeadNight)
+			L2Attackable newNpc;
+			for (int id : ForestOfDeadNight)
 			{
 				if (npcId == id)
 				{
@@ -147,13 +202,13 @@ public class HallowedYou extends Quest
 					{
 						isPet = true;
 					}
-					L2Character originalAttacker = isPet? player.getSummon(): player;
+					L2Character originalAttacker = isPet ? player.getSummon() : player;
 					newNpc.setRunning();
-					newNpc.addDamageHate(originalAttacker,0,500);
+					newNpc.addDamageHate(originalAttacker, 0, 500);
 					newNpc.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, originalAttacker);
 				}
 			}
-			for (int id: TheCementary)
+			for (int id : TheCementary)
 			{
 				if (npcId == id)
 				{
@@ -163,13 +218,13 @@ public class HallowedYou extends Quest
 					{
 						isPet = true;
 					}
-					L2Character originalAttacker = isPet? player.getSummon(): player;
+					L2Character originalAttacker = isPet ? player.getSummon() : player;
 					newNpc.setRunning();
-					newNpc.addDamageHate(originalAttacker,0,500);
+					newNpc.addDamageHate(originalAttacker, 0, 500);
 					newNpc.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, originalAttacker);
 				}
 			}
-			for (int id: ImperialTomb)
+			for (int id : ImperialTomb)
 			{
 				if (npcId == id)
 				{
@@ -179,9 +234,9 @@ public class HallowedYou extends Quest
 					{
 						isPet = true;
 					}
-					L2Character originalAttacker = isPet? player.getSummon(): player;
+					L2Character originalAttacker = isPet ? player.getSummon() : player;
 					newNpc.setRunning();
-					newNpc.addDamageHate(originalAttacker,0,500);
+					newNpc.addDamageHate(originalAttacker, 0, 500);
 					newNpc.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, originalAttacker);
 				}
 			}
@@ -191,6 +246,7 @@ public class HallowedYou extends Quest
 			// do nothing
 		}
 	}
+	
 	public HallowedYou(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
@@ -209,12 +265,13 @@ public class HallowedYou extends Quest
 		{
 			addKillId(id);
 		}
-		addKillId(GHOST);		
+		addKillId(GHOST);
 	}
+	
 	public static void main(String[] args)
 	{
-		new HallowedYou(-1,qn,"events");
-		if(FunEvents.HY_STARTED)
+		new HallowedYou(-1, HallowedYou.class.getSimpleName(), "events");
+		if (FunEvents.HY_STARTED)
 		{
 			_log.warning("Event System: Hallowen Event loaded ...");
 		}

@@ -33,8 +33,6 @@ import com.l2jserver.gameserver.network.serverpackets.RadarControl;
  */
 public class Nottingale extends Quest
 {
-	private static final String qn = "Nottingale";
-	
 	private static final int NPC = 32627;
 	
 	public Nottingale(int questId, String name, String descr)
@@ -92,7 +90,7 @@ public class Nottingale extends Quest
 	@Override
 	public String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -104,6 +102,6 @@ public class Nottingale extends Quest
 	
 	public static void main(String[] args)
 	{
-		new Nottingale(-1, qn, "custom");
+		new Nottingale(-1, Nottingale.class.getSimpleName(), "custom");
 	}
 }

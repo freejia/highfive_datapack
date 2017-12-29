@@ -110,6 +110,7 @@ import handlers.admincommandhandlers.AdminQuest;
 import handlers.admincommandhandlers.AdminRepairChar;
 import handlers.admincommandhandlers.AdminRes;
 import handlers.admincommandhandlers.AdminRide;
+import handlers.admincommandhandlers.AdminScan;
 import handlers.admincommandhandlers.AdminShop;
 import handlers.admincommandhandlers.AdminShowQuests;
 import handlers.admincommandhandlers.AdminShutdown;
@@ -420,6 +421,7 @@ public class MasterHandler
 			AdminRepairChar.class,
 			AdminRes.class,
 			AdminRide.class,
+			AdminScan.class,
 			AdminShop.class,
 			AdminShowQuests.class,
 			AdminShutdown.class,

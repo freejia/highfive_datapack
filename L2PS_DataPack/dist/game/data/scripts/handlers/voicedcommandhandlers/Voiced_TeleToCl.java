@@ -16,6 +16,7 @@ package handlers.voicedcommandhandlers;
 
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
+import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.ExShowScreenMessage;
@@ -43,44 +44,48 @@ public class Voiced_TeleToCl implements IVoicedCommandHandler
 			
 			if (leader == null)
 			{
-				activeChar.sendPacket(new ExShowScreenMessage("You can use this server now, because clan leader is offline.", 5));
+				activeChar.sendPacket(new ExShowScreenMessage("You cant use this command now, because clan leader is offline.", 5));
 				return false;
 			}
 			else if (leader.isInJail())
 			{
-				activeChar.sendPacket(new ExShowScreenMessage("You can use this server now, because clan leader is in jail.", 5));
+				activeChar.sendPacket(new ExShowScreenMessage("You cant use this command now, because clan leader is in jail.", 5));
 				return false;
 			}
 			else if (leader.isInOlympiadMode())
 			{
-				activeChar.sendPacket(new ExShowScreenMessage("You can use this server now, because clan leader is in olympiad.", 5));
+				activeChar.sendPacket(new ExShowScreenMessage("You cant use this command now, because clan leader is in olympiad.", 5));
 				return false;
 			}
 			else if (leader.isInDuel())
 			{
-				activeChar.sendPacket(new ExShowScreenMessage("You can use this server now, because clan leader is in duel.", 5));
+				activeChar.sendPacket(new ExShowScreenMessage("You cant use this command now, because clan leader is in duel.", 5));
 				return false;
 			}
 			else if (leader.isFestivalParticipant())
 			{
-				activeChar.sendPacket(new ExShowScreenMessage("You can use this server now, because clan leader is in register list for Festival.", 5));
+				activeChar.sendPacket(new ExShowScreenMessage("You cant use this command now, because clan leader is in register list for Festival.", 5));
 				return false;
 			}
 			else if (leader.isInParty() && leader.getParty().isInDimensionalRift())
 			{
-				activeChar.sendPacket(new ExShowScreenMessage("You can use this server now, because clan leader is in Rift.", 5));
+				activeChar.sendPacket(new ExShowScreenMessage("You cant use this command now, because clan leader is in Rift.", 5));
 				return false;
 			}
 			else if (leader.inObserverMode())
 			{
-				activeChar.sendPacket(new ExShowScreenMessage("You can use this server now, because clan leader is in register list for olympiad.", 5));
+				activeChar.sendPacket(new ExShowScreenMessage("You cant use this command now, because clan leader is in register list for olympiad.", 5));
 			}
 			else if ((leader.getClan() != null) && (CastleManager.getInstance().getCastleByOwner(leader.getClan()) != null) && CastleManager.getInstance().getCastleByOwner(leader.getClan()).getSiege().getIsInProgress())
 			{
-				activeChar.sendPacket(new ExShowScreenMessage("You can use this server now, because clan leader is in siege.", 5));
+				activeChar.sendPacket(new ExShowScreenMessage("You cant use this command now, because clan leader is in siege.", 5));
 				return false;
 			}
-			
+			else if (TerritoryWarManager.getInstance().isTWInProgress())
+			{
+				activeChar.sendPacket(new ExShowScreenMessage("You cant use this command now, because TW is in progress", 5));
+				return false;
+			}
 			else if (activeChar.isInJail())
 			{
 				activeChar.sendPacket(new ExShowScreenMessage("You are in jail.", 5));
@@ -117,7 +122,7 @@ public class Voiced_TeleToCl implements IVoicedCommandHandler
 			}
 			else if (activeChar == leader())
 			{
-				activeChar.sendPacket(new ExShowScreenMessage("You cant use this server for now.", 5));
+				activeChar.sendPacket(new ExShowScreenMessage("You cant use this command for now.", 5));
 				return false;
 			}
 			if (activeChar.getInventory().getItemByItemId(57) == null)

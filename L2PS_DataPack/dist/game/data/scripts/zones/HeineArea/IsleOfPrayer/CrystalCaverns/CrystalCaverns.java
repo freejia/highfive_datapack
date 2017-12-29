@@ -95,7 +95,6 @@ public class CrystalCaverns extends Quest
 			false,
 			false
 		};
-		public int kechisHenchmanSpawn = 0;
 		public int[] roomsStatus =
 		{
 			0,
@@ -107,7 +106,6 @@ public class CrystalCaverns extends Quest
 		public Map<Integer, Map<L2Npc, Boolean>> npcList2 = new FastMap<>();
 		public Map<L2Npc, L2Npc> oracles = new FastMap<>();
 		public List<L2Npc> keyKeepers = new FastList<>();
-		public List<L2Npc> guards = new FastList<>();
 		public List<L2Npc> oracle = new FastList<>();
 		// baylor variables
 		protected final List<L2PcInstance> _raiders = new FastList<>();
@@ -125,7 +123,6 @@ public class CrystalCaverns extends Quest
 		}
 	}
 	
-	private static final String qn = "CrystalCaverns";
 	private static final int INSTANCEID = 10; // this is the client number
 	private static final boolean debug = false;
 	
@@ -166,12 +163,11 @@ public class CrystalCaverns extends Quest
 	private static final int GUARDIAN = 22303;
 	private static final int GUARDIAN2 = 22304;
 	
-	private static final int TEARS = 25534;
-	private static final int TEARS_COPY = 25535;
-	private static final int KECHI = 25532;
-	private static final int KECHIGUARD = 25533;
-	private static final int BAYLOR = 29099;
-	private static final int DARNEL = 25531;
+	private static final int TEARS = 25716;
+	private static final int TEARS_COPY = 25717;
+	private static final int KECHI = 25714;
+	private static final int BAYLOR = 29186;
+	private static final int DARNEL = 25713;
 	private final static int ALARMID = 18474;
 	
 	// private static final int[] BOSSCR = {9695,9696,9697};
@@ -185,15 +181,6 @@ public class CrystalCaverns extends Quest
 		22316,
 		22317
 	};
-	private static final int[] SPAWN =
-	{
-		60000,
-		120000,
-		90000,
-		60000,
-		50000,
-		40000
-	}; // Kechi Hencmans spawn times
 	private static final int[] MOBLIST =
 	{
 		22279,
@@ -1811,10 +1798,10 @@ public class CrystalCaverns extends Quest
 	}
 	
 	/*
-	 * protected void runBaylorRoom(CCWorld world) { world.status = 30; addSpawn(29101,152758,143479,-12706,52961,false,0,false,world.getInstanceId(),0);//up power addSpawn(29101,151951,142078,-12706,65203,false,0,false,world.getInstanceId(),0);//up power
-	 * addSpawn(29101,154396,140667,-12706,22197,false,0,false,world.getInstanceId(),0);//up power addSpawn(29102,152162,141249,-12706,5511,false,0,false,world.getInstanceId(),0);//down power addSpawn(29102,153571,140458,-12706,16699,false,0,false,world.getInstanceId(),0);//down power
-	 * addSpawn(29102,154976,141265,-12706,26908,false,0,false,world.getInstanceId(),0);//down power addSpawn(29102,155203,142071,-12706,31560,false,0,false,world.getInstanceId(),0);//down power addSpawn(29102,154380,143468,-12708,43943,false,0,false,world.getInstanceId(),0);//down power
-	 * addSpawn(32271,153573,142069,-9722,11175,false,0,false,world.getInstanceId()); world.Baylor = addSpawn(BAYLOR,153557,142089,-12735,11175,false,0,false,world.getInstanceId(),0); }
+	 * protected void runBaylorRoom(CCWorld world) { world.status = 30; addSpawn(29101, 152758, 143479, -12706, 52961, false, 0, false, world.getInstanceId(), 0);// up power addSpawn(29101,151951,142078,-12706,65203,false,0,false,world.getInstanceId(),0);//up power addSpawn(29101, 154396, 140667,
+	 * -12706, 22197, false, 0, false, world.getInstanceId(), 0);// up power addSpawn(29102,152162,141249,-12706,5511,false,0,false,world.getInstanceId(),0);//down power addSpawn(29102,153571,140458,-12706,16699,false,0,false,world.getInstanceId(),0);//down power addSpawn(29102, 154976, 141265,
+	 * -12706, 26908, false, 0, false, world.getInstanceId(), 0);// down power addSpawn(29102,155203,142071,-12706,31560,false,0,false,world.getInstanceId(),0);//down power addSpawn(29102,154380,143468,-12708,43943,false,0,false,world.getInstanceId(),0);//down power addSpawn(32271, 153573, 142069,
+	 * -9722, 11175, false, 0, false, world.getInstanceId()); world.Baylor = addSpawn(BAYLOR, 153557, 142089, -12735, 11175, false, 0, false, world.getInstanceId(), 0); }
 	 */
 	
 	@Override
@@ -2117,7 +2104,6 @@ public class CrystalCaverns extends Quest
 			{
 				if (npc.isInCombat())
 				{
-					startQuestTimer("spawnGuards", SPAWN[0], npc, null);
 					cancelQuestTimers("checkKechiAttack");
 					closeDoor(DOOR4, npc.getInstanceId());
 					closeDoor(DOOR3, npc.getInstanceId());
@@ -2125,27 +2111,6 @@ public class CrystalCaverns extends Quest
 				else
 				{
 					startQuestTimer("checkKechiAttack", 1000, npc, null);
-				}
-			}
-			else if (event.equalsIgnoreCase("spawnGuards"))
-			{
-				world.kechisHenchmanSpawn++;
-				world.guards.add(addSpawn(KECHIGUARD, 153622, 149699, -12131, 56890, false, 0, false, world.getInstanceId()));
-				world.guards.add(addSpawn(KECHIGUARD, 153609, 149622, -12131, 64023, false, 0, false, world.getInstanceId()));
-				world.guards.add(addSpawn(KECHIGUARD, 153606, 149428, -12131, 64541, false, 0, false, world.getInstanceId()));
-				world.guards.add(addSpawn(KECHIGUARD, 153601, 149534, -12131, 64901, false, 0, false, world.getInstanceId()));
-				world.guards.add(addSpawn(KECHIGUARD, 153620, 149354, -12131, 1164, false, 0, false, world.getInstanceId()));
-				world.guards.add(addSpawn(KECHIGUARD, 153637, 149776, -12131, 61733, false, 0, false, world.getInstanceId()));
-				world.guards.add(addSpawn(KECHIGUARD, 153638, 149292, -12131, 64071, false, 0, false, world.getInstanceId()));
-				world.guards.add(addSpawn(KECHIGUARD, 153647, 149857, -12131, 59402, false, 0, false, world.getInstanceId()));
-				world.guards.add(addSpawn(KECHIGUARD, 153661, 149227, -12131, 65275, false, 0, false, world.getInstanceId()));
-				if (world.kechisHenchmanSpawn <= 5)
-				{
-					startQuestTimer("spawnGuards", SPAWN[world.kechisHenchmanSpawn], npc, null);
-				}
-				else
-				{
-					cancelQuestTimers("spawnGuards");
 				}
 			}
 			else if (event.equalsIgnoreCase("EmeraldSteam"))
@@ -2197,19 +2162,43 @@ public class CrystalCaverns extends Quest
 			}
 			else if (event.equalsIgnoreCase("BaylorMinions"))
 			{
-				for (int i = 0; i < 10; i++)
-				{
-					int radius = 300;
-					int x = (int) (radius * Math.cos(i * 0.618));
-					int y = (int) (radius * Math.sin(i * 0.618));
-					L2Npc mob = addSpawn(29104, 153571 + x, 142075 + y, -12737, 0, false, 0, false, world.getInstanceId());
-					mob.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-					world._animationMobs.add(mob);
-				}
+				// Fix for Baylor Anime
+				L2Npc mob1 = addSpawn(29104, 153800, 142296, -12737, 41499, false, 0, false, world.getInstanceId());
+				L2Npc mob2 = addSpawn(29104, 153901, 142075, -12737, 32643, false, 0, false, world.getInstanceId());
+				L2Npc mob3 = addSpawn(29104, 153800, 141855, -12737, 24843, false, 0, false, world.getInstanceId());
+				L2Npc mob4 = addSpawn(29104, 153569, 141755, -12737, 16232, false, 0, false, world.getInstanceId());
+				L2Npc mob5 = addSpawn(29104, 153343, 141857, -12737, 7755, false, 0, false, world.getInstanceId());
+				L2Npc mob6 = addSpawn(29104, 153259, 142074, -12737, 112, false, 0, false, world.getInstanceId());
+				L2Npc mob7 = addSpawn(29104, 153346, 142295, -12737, 57834, false, 0, false, world.getInstanceId());
+				L2Npc mob8 = addSpawn(29104, 153570, 142394, -12737, 48624, false, 0, false, world.getInstanceId());
+				mob1.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+				mob2.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+				mob3.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+				mob4.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+				mob5.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+				mob6.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+				mob7.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+				mob8.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+				world._animationMobs.add(mob1);
+				world._animationMobs.add(mob2);
+				world._animationMobs.add(mob3);
+				world._animationMobs.add(mob4);
+				world._animationMobs.add(mob5);
+				world._animationMobs.add(mob6);
+				world._animationMobs.add(mob7);
+				world._animationMobs.add(mob8);
 				startQuestTimer("baylorEffect0", 200, npc, null);
 			}
 			else if (event.equalsIgnoreCase("RaidStart"))
 			{
+				addSpawn(29105, 154391, 143489, -12711, 44460, false, 0, false, world.getInstanceId());
+				addSpawn(29105, 155236, 142068, -12711, 32555, false, 0, false, world.getInstanceId());
+				addSpawn(29105, 154971, 141268, -12711, 27221, false, 0, false, world.getInstanceId());
+				addSpawn(29105, 154382, 140682, -12711, 22581, false, 0, false, world.getInstanceId());
+				addSpawn(29105, 153576, 140445, -12711, 15361, false, 0, false, world.getInstanceId());
+				addSpawn(29105, 152148, 141259, -12711, 4601, false, 0, false, world.getInstanceId());
+				addSpawn(29105, 151931, 142077, -12711, 64884, false, 0, false, world.getInstanceId());
+				addSpawn(29105, 152742, 143499, -12711, 54496, false, 0, false, world.getInstanceId());
 				world._camera.decayMe();
 				world._camera = null;
 				npc.setIsParalyzed(false);
@@ -2437,7 +2426,7 @@ public class CrystalCaverns extends Quest
 			{
 				if (partyMember.getInstanceId() == instanceId)
 				{
-					QuestState st = partyMember.getQuestState(qn);
+					QuestState st = partyMember.getQuestState(getName());
 					if (st == null)
 					{
 						st = newQuestState(partyMember);
@@ -2460,7 +2449,7 @@ public class CrystalCaverns extends Quest
 		}
 		else if (player.getInstanceId() == instanceId)
 		{
-			QuestState st = player.getQuestState(qn);
+			QuestState st = player.getQuestState(getName());
 			if (st == null)
 			{
 				st = newQuestState(player);
@@ -2676,7 +2665,6 @@ public class CrystalCaverns extends Quest
 				if (npc.getNpcId() == KECHI)
 				{
 					bossCry = BOSS_CRYSTAL_2;
-					cancelQuestTimers("spawnGuards");
 					addSpawn(32280, 154077, 149527, -12159, 0, false, 0, false, world.getInstanceId());
 				}
 				else if (npc.getNpcId() == DARNEL)
@@ -2719,7 +2707,7 @@ public class CrystalCaverns extends Quest
 	public String onTalk(L2Npc npc, L2PcInstance player)
 	{
 		int npcId = npc.getNpcId();
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -2968,7 +2956,7 @@ public class CrystalCaverns extends Quest
 							{
 								return "";
 							}
-							QuestState st = ((L2PcInstance) character).getQuestState(qn);
+							QuestState st = ((L2PcInstance) character).getQuestState(getName());
 							if (st == null)
 							{
 								st = newQuestState((L2PcInstance) character);
@@ -3118,6 +3106,6 @@ public class CrystalCaverns extends Quest
 	public static void main(String[] args)
 	{
 		// now call the constructor (starts up the)
-		new CrystalCaverns(-1, qn, "zones/HeineArea/IsleOfPrayer/");
+		new CrystalCaverns(-1, CrystalCaverns.class.getSimpleName(), "zones/HeineArea/IsleOfPrayer/");
 	}
 }

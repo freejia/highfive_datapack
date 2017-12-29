@@ -231,6 +231,7 @@
 		<set name="saveVs" val="MEN" />
 		<set name="skillType" val="MDAM" />
 		<set name="targetType" val="ONE" />
+		<set name="pvp" val="true" />
 		<enchant1 name="magicLvl" val="#enchMagicLvl" />
 		<enchant1 name="power" val="#ench1Power" />
 		<enchant2 name="magicLvl" val="#enchMagicLvl" />
@@ -269,6 +270,7 @@
 		<set name="saveVs" val="MEN" />
 		<set name="skillType" val="AGGREMOVE" />
 		<set name="targetType" val="ONE" />
+		<set name="pvp" val="true" />
 		<set name="trait" val="DERANGEMENT" />
 		<for>
 			<effect name="Debuff" abnormalTime="120" val="0" abnormalLvl="1" abnormalType="turn_passive">

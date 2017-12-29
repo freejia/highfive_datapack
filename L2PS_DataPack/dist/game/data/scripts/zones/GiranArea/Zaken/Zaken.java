@@ -23,9 +23,9 @@ import javolution.util.FastList;
 import javolution.util.FastMap;
 import ai.npc.AbstractNpcAI;
 
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.GeoEngine;
 import com.l2jserver.gameserver.datatables.SkillTable;
-import com.l2jserver.gameserver.instancemanager.GrandBossManager;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.L2Object;
@@ -43,7 +43,6 @@ import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.skills.L2Skill;
 import com.l2jserver.gameserver.model.zone.L2ZoneForm;
 import com.l2jserver.gameserver.model.zone.L2ZoneType;
-import com.l2jserver.gameserver.model.zone.type.L2BossZone;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.AbstractNpcInfo;
 import com.l2jserver.gameserver.network.serverpackets.PlaySound;
@@ -128,6 +127,12 @@ public class Zaken extends AbstractNpcAI
 	private static final int ZOMBIE_DAY83 = 29185;
 	private static final int PATHFINDER = 32713;
 	private static final int BARREL = 32705;
+	private static int MIN_P_DAYTIME = Config.MIN_ZAKEN_DAY_PLAYERS;
+	private static int MAX_P_DAYTIME = Config.MAX_ZAKEN_DAY_PLAYERS;
+	private static int MIN_LV_DAYTIME = Config.MIN_LEVEL_DAYTIME_ZAKEN;
+	private static int MIN_LV_DAYTIME_83 = Config.MIN_LEVEL_DAYTIME_83_ZAKEN;
+	private static int MIN_P_NIGHTTIME = Config.MIN_ZAKEN_NIGHT_PLAYERS;
+	private static int MAX_P_NIGHTTIME = Config.MAX_ZAKEN_NIGHT_PLAYERS;
 	private static List<L2PcInstance> _playersInside = new FastList<>();
 	private static int _room1_zone = 120111;
 	private static int _room2_zone = 120112;
@@ -397,8 +402,8 @@ public class Zaken extends AbstractNpcAI
 		
 		List<L2PcInstance> members;
 		int minLevel = 0; // nighttime haven't level limit
-		int minMembers = 1; // for daytime
-		int maxMembers = 27; // for daytime
+		int minMembers = MIN_P_DAYTIME;
+		int maxMembers = MAX_P_DAYTIME;
 		
 		if (party.isInCommandChannel())
 		{
@@ -411,17 +416,17 @@ public class Zaken extends AbstractNpcAI
 		
 		if (choice.equalsIgnoreCase("daytime"))
 		{
-			minLevel = 55;
+			minLevel = MIN_LV_DAYTIME;
 		}
 		else if (choice.equalsIgnoreCase("daytime83"))
 		{
-			minLevel = 78;
+			minLevel = MIN_LV_DAYTIME_83;
 		}
 		
 		if (choice.equalsIgnoreCase("nighttime"))
 		{
-			minMembers = 1;
-			maxMembers = 450;
+			minMembers = MIN_P_NIGHTTIME;
+			maxMembers = MAX_P_NIGHTTIME;
 		}
 		
 		for (L2PcInstance member : members)
@@ -457,7 +462,7 @@ public class Zaken extends AbstractNpcAI
 			}
 			else if (members.size() > maxMembers)
 			{
-				SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.YOU_CANNOT_ENTER_BECAUSE_MAXIMUM_ENTRANTS); // FIXME: Need correct msg
+				SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.YOU_CANNOT_ENTER_BECAUSE_MAXIMUM_ENTRANTS);
 				sm.addNumber(maxMembers);
 				if (party.isInCommandChannel())
 				{
@@ -1102,11 +1107,9 @@ public class Zaken extends AbstractNpcAI
 				
 				for (L2PcInstance player : world._playersInInstance)
 				{
-					if (player != null)
-					{
-						savePlayerReenter(player);
-						player.sendPacket(new PlaySound("BS02_D"));
-					}
+					savePlayerReenter(player);
+					player.sendPacket(new PlaySound("BS02_D"));
+					
 				}
 			}
 		}
@@ -1121,13 +1124,9 @@ public class Zaken extends AbstractNpcAI
 		{
 			int skillId = 0;
 			
-			L2BossZone zone = GrandBossManager.getInstance().getZone(55312, 219168, -3223);
-			
-			if (zone.isInsideZone(npc))
-			{
-				L2Character target = isPet ? player.getSummon() : player;
-				((L2Attackable) npc).addDamageHate(target, 1, 200);
-			}
+			/*
+			 * L2BossZone zone = GrandBossManager.getInstance().getZone(55312, 219168, -3223); if (zone.isInsideZone(npc)) { L2Character target = isPet ? player.getSummon() : player; ((L2Attackable) npc).addDamageHate(target, 1, 200); }
+			 */
 			if ((player.getZ() > (npc.getZ() - 100)) && (player.getZ() < (npc.getZ() + 100)))
 			{
 				if (Rnd.get(15) < 1)

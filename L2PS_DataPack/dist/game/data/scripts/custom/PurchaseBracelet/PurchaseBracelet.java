@@ -29,8 +29,6 @@ import com.l2jserver.gameserver.model.quest.QuestState;
  */
 public class PurchaseBracelet extends Quest
 {
-	private static final String qn = "PurchaseBracelet";
-	
 	private static final int NPC = 30098;
 	
 	private static final int ANGEL_BRACELET = 10320;
@@ -48,7 +46,7 @@ public class PurchaseBracelet extends Quest
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
 		String htmltext = event;
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			return htmltext;
@@ -85,7 +83,7 @@ public class PurchaseBracelet extends Quest
 	public String onTalk(L2Npc npc, L2PcInstance player)
 	{
 		String htmltext = "";
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -104,6 +102,6 @@ public class PurchaseBracelet extends Quest
 	
 	public static void main(String args[])
 	{
-		new PurchaseBracelet(-1, qn, "custom");
+		new PurchaseBracelet(-1, PurchaseBracelet.class.getSimpleName(), "custom");
 	}
 }

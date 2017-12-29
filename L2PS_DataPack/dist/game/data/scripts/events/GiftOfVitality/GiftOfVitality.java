@@ -25,16 +25,15 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
 /**
- * @Fixed by L2Ps Team
- * www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class GiftOfVitality extends Quest
 {
-	//Reuse between buffs
+	// Reuse between buffs
 	private static final int _hours = 5;
- 
+	
 	private static final int _jack = 4306;
- 
+	
 	private static final Location[] _spawns =
 	{
 		new Location(82766, 149438, -3464, 33865),
@@ -42,17 +41,17 @@ public class GiftOfVitality extends Quest
 		new Location(147013, 25931, -2013, 18774),
 		new Location(148096, -55466, -2728, 40541),
 		new Location(87068, -141335, -1341, 52193),
-	 	new Location(43521, -47542, -792, 31655),
-	 	new Location(17203, 144949, -3024, 18166),
-	 	new Location(111159, 221098, -3543, 2714),
-	 	new Location(-13869, 122063, -2984, 18270),
-	 	new Location(-83161, 150915, -3120, 17311),
-	 	new Location(45362, 48347, -3060, 49153),
-	 	new Location(115591, -177908, -907, 30708),
-	 	new Location(-44928, -113608, -192, 30212),
-	 	new Location(-83992, 243154, -3730, 8992),
-	 	new Location(-119690, 44583, 360, 29289),
-	 	new Location(12075, 16528, -4590, 57345)
+		new Location(43521, -47542, -792, 31655),
+		new Location(17203, 144949, -3024, 18166),
+		new Location(111159, 221098, -3543, 2714),
+		new Location(-13869, 122063, -2984, 18270),
+		new Location(-83161, 150915, -3120, 17311),
+		new Location(45362, 48347, -3060, 49153),
+		new Location(115591, -177908, -907, 30708),
+		new Location(-44928, -113608, -192, 30212),
+		new Location(-83992, 243154, -3730, 8992),
+		new Location(-119690, 44583, 360, 29289),
+		new Location(12075, 16528, -4590, 57345)
 	};
 	
 	public GiftOfVitality(int questId, String name, String descr)
@@ -174,6 +173,6 @@ public class GiftOfVitality extends Quest
 	
 	public static void main(String[] args)
 	{
-		new GiftOfVitality(-1, "GiftOfVitality", "events");
+		new GiftOfVitality(-1, GiftOfVitality.class.getSimpleName(), "events");
 	}
 }

@@ -23,24 +23,43 @@ import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.util.Rnd;
 
 /**
- * @Fixed by L2Ps Team
- * www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class SuperStar extends Quest
 {
-	private static final String qn = "SuperStar";
 	private static final int SuperStarNpc = 503;
-	private static final int[] EventMonsters = 
-	{ 
-		7000,7001,7002,7003,7004,7005,7006,7007,7008,7009,
-		7010,7011,7012,7013,7014,7015,7016,7017,7018,7019,
-		7020,7021,7022,7023
+	private static final int[] EventMonsters =
+	{
+		7000,
+		7001,
+		7002,
+		7003,
+		7004,
+		7005,
+		7006,
+		7007,
+		7008,
+		7009,
+		7010,
+		7011,
+		7012,
+		7013,
+		7014,
+		7015,
+		7016,
+		7017,
+		7018,
+		7019,
+		7020,
+		7021,
+		7022,
+		7023
 	};
 	
 	@Override
 	public final String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -59,12 +78,12 @@ public class SuperStar extends Quest
 	}
 	
 	@Override
-	public final String onAdvEvent (String event, L2Npc npc, L2PcInstance player)
+	public final String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
 		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
-			st = newQuestState(player);	
+			st = newQuestState(player);
 		}
 		String htmltext = "";
 		int starInteger;
@@ -85,7 +104,7 @@ public class SuperStar extends Quest
 		{
 			if (starInteger >= 5)
 			{
-				rewardPlayer(player,5);
+				rewardPlayer(player, 5);
 				htmltext = "prizes.htm";
 			}
 			else
@@ -97,7 +116,7 @@ public class SuperStar extends Quest
 		{
 			if (starInteger >= 25)
 			{
-				rewardPlayer(player,25);
+				rewardPlayer(player, 25);
 				htmltext = "prizes.htm";
 			}
 			else
@@ -109,7 +128,7 @@ public class SuperStar extends Quest
 		{
 			if (starInteger >= 50)
 			{
-				rewardPlayer(player,50);
+				rewardPlayer(player, 50);
 				htmltext = "prizes.htm";
 			}
 			else
@@ -120,29 +139,26 @@ public class SuperStar extends Quest
 		if (event.equalsIgnoreCase("info"))
 		{
 			htmltext = "info.htm";
-			if (starInteger >0)
+			if (starInteger > 0)
 			{
-				player.sendMessage("You have "+ String.valueOf(starInteger)+" stars.");
+				player.sendMessage("You have " + String.valueOf(starInteger) + " stars.");
 			}
 		}
 		if (event.equalsIgnoreCase("back"))
 		{
 			htmltext = "welcome.htm";
 		}
-       	return htmltext;
+		return htmltext;
 	}
-
+	
 	/**
-	 * RewardList
-	 * 5 -] Adena 450-4500, Backup Stones - 1
-	 * 25 -] Adena 750-4500, Vitality 5000, Backup Stones - 1
-	 * 50 -] Adena 4000-4500, Vitality 10000,Backup Stones - 2
+	 * RewardList 5 -] Adena 450-4500, Backup Stones - 1 25 -] Adena 750-4500, Vitality 5000, Backup Stones - 1 50 -] Adena 4000-4500, Vitality 10000,Backup Stones - 2
 	 * @param player
 	 * @param i
 	 */
-	private void rewardPlayer(L2PcInstance player, int i) 
+	private void rewardPlayer(L2PcInstance player, int i)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		int starInteger;
 		try
 		{
@@ -160,24 +176,24 @@ public class SuperStar extends Quest
 			int randomChance = Rnd.get(100);
 			if (randomChance < 50)
 			{
-				st.giveItems(57, Rnd.get(450,player.getMaxHp()));
+				st.giveItems(57, Rnd.get(450, player.getMaxHp()));
 			}
-			else if (randomChance >=50 && randomChance < 70)
-			{				
+			else if ((randomChance >= 50) && (randomChance < 70))
+			{
 				int level = player.getLevel();
 				if (level < 40)
 				{
-					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_D, 1);	
+					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_D, 1);
 				}
-				else if (level >=40 && level < 52)
+				else if ((level >= 40) && (level < 52))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_C, 1);
 				}
-				else if (level >=52 && level < 61)
+				else if ((level >= 52) && (level < 61))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_B, 1);
 				}
-				else if (level >=61 && level < 76)
+				else if ((level >= 61) && (level < 76))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_A, 1);
 				}
@@ -191,17 +207,17 @@ public class SuperStar extends Quest
 				int level = player.getLevel();
 				if (level < 40)
 				{
-					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_D, 1);	
+					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_D, 1);
 				}
-				else if (level >=40 && level < 52)
+				else if ((level >= 40) && (level < 52))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_C, 1);
 				}
-				else if (level >=52 && level < 61)
+				else if ((level >= 52) && (level < 61))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_B, 1);
 				}
-				else if (level >=61 && level < 76)
+				else if ((level >= 61) && (level < 76))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_A, 1);
 				}
@@ -218,24 +234,24 @@ public class SuperStar extends Quest
 			int randomChance = Rnd.get(100);
 			if (randomChance < 50)
 			{
-				st.giveItems(57, Rnd.get(750,player.getMaxHp()));
+				st.giveItems(57, Rnd.get(750, player.getMaxHp()));
 			}
-			else if (randomChance >=50 && randomChance < 70)
-			{				
+			else if ((randomChance >= 50) && (randomChance < 70))
+			{
 				int level = player.getLevel();
 				if (level < 40)
 				{
-					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_D, 1);	
+					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_D, 1);
 				}
-				else if (level >=40 && level < 52)
+				else if ((level >= 40) && (level < 52))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_C, 1);
 				}
-				else if (level >=52 && level < 61)
+				else if ((level >= 52) && (level < 61))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_B, 1);
 				}
-				else if (level >=61 && level < 76)
+				else if ((level >= 61) && (level < 76))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_A, 1);
 				}
@@ -244,22 +260,22 @@ public class SuperStar extends Quest
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_S, 1);
 				}
 			}
-			else if (randomChance >=70 && randomChance < 90)
+			else if ((randomChance >= 70) && (randomChance < 90))
 			{
 				int level = player.getLevel();
 				if (level < 40)
 				{
-					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_D, 1);	
+					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_D, 1);
 				}
-				else if (level >=40 && level < 52)
+				else if ((level >= 40) && (level < 52))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_C, 1);
 				}
-				else if (level >=52 && level < 61)
+				else if ((level >= 52) && (level < 61))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_B, 1);
 				}
-				else if (level >=61 && level < 76)
+				else if ((level >= 61) && (level < 76))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_A, 1);
 				}
@@ -280,24 +296,24 @@ public class SuperStar extends Quest
 			int randomChance = Rnd.get(100);
 			if (randomChance < 50)
 			{
-				st.giveItems(57, Rnd.get(1250,player.getMaxHp()));
+				st.giveItems(57, Rnd.get(1250, player.getMaxHp()));
 			}
-			else if (randomChance >=50 && randomChance < 70)
-			{				
+			else if ((randomChance >= 50) && (randomChance < 70))
+			{
 				int level = player.getLevel();
 				if (level < 40)
 				{
-					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_D, 2);	
+					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_D, 2);
 				}
-				else if (level >=40 && level < 52)
+				else if ((level >= 40) && (level < 52))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_C, 2);
 				}
-				else if (level >=52 && level < 61)
+				else if ((level >= 52) && (level < 61))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_B, 2);
 				}
-				else if (level >=61 && level < 76)
+				else if ((level >= 61) && (level < 76))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_A, 2);
 				}
@@ -306,22 +322,22 @@ public class SuperStar extends Quest
 					st.giveItems(FunEvents.SS_BACKUP_STONE_WEP_S, 2);
 				}
 			}
-			else if (randomChance >=70 && randomChance < 90)
+			else if ((randomChance >= 70) && (randomChance < 90))
 			{
 				int level = player.getLevel();
 				if (level < 40)
 				{
-					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_D, 2);	
+					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_D, 2);
 				}
-				else if (level >=40 && level < 52)
+				else if ((level >= 40) && (level < 52))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_C, 2);
 				}
-				else if (level >=52 && level < 61)
+				else if ((level >= 52) && (level < 61))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_B, 2);
 				}
-				else if (level >=61 && level < 76)
+				else if ((level >= 61) && (level < 76))
 				{
 					st.giveItems(FunEvents.SS_BACKUP_STONE_ARM_A, 2);
 				}
@@ -334,59 +350,62 @@ public class SuperStar extends Quest
 			{
 				player.setVitalityPoints(player.getVitalityPoints() + 10000, false);
 			}
-		}		
+		}
 	}
-
+	
 	/**
 	 * On Kill Monster Script
 	 */
 	@Override
-	public final String onKill(L2Npc npc,L2PcInstance player, boolean isPet)
+	public final String onKill(L2Npc npc, L2PcInstance player, boolean isPet)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
-			st = newQuestState(player);	
+			st = newQuestState(player);
 		}
 		int npcId = npc.getNpcId();
 		if (FunEvents.SS_STARTED)
 		{
-			for(int ID : EventMonsters)
-			{ 
+			for (int ID : EventMonsters)
+			{
 				if (npcId == ID)
 				{
 					int killedValue = 0;
 					try
 					{
-						killedValue = Integer.valueOf(st.get("starInteger")) + 1;						
+						killedValue = Integer.valueOf(st.get("starInteger")) + 1;
 					}
-					catch(Exception e)
+					catch (Exception e)
 					{
 						killedValue = 1;
 					}
 					st.set("starInteger", String.valueOf(killedValue));
-					player.sendMessage("You find 1 star and have " + st.get("starInteger")+" stars.");
+					player.sendMessage("You find 1 star and have " + st.get("starInteger") + " stars.");
 				}
-			}			
+			}
 		}
 		return super.onKill(npc, player, isPet);
-	}	
+	}
 	
 	public SuperStar(int questId, String name, String descr)
 	{
-		super(questId, name, descr);		
+		super(questId, name, descr);
 		addStartNpc(SuperStarNpc);
 		addFirstTalkId(SuperStarNpc);
 		addTalkId(SuperStarNpc);
-		for (int MONSTER: EventMonsters)
+		for (int MONSTER : EventMonsters)
 		{
 			addKillId(MONSTER);
-		}		
+		}
 	}
+	
 	public static void main(String[] args)
 	{
-		new SuperStar(-1,qn,"events");
+		new SuperStar(-1, SuperStar.class.getSimpleName(), "events");
 		if (FunEvents.SS_STARTED)
+		{
 			_log.info("Event System: SuperStar Event loaded ...");
+		}
 	}
 }

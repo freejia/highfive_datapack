@@ -659,21 +659,24 @@
 		<set name="targetType" val="NONE" />
 	</skill>
 	<skill id="6652" levels="1" name="Level 85 Raid Boss">
-		<!-- This Skill Is Only For Description In The Client -->
-		<set name="magicLvl" val="1" />
-		<set name="operateType" val="P" />
+		<!-- Confirmed CT2.5 --> 
+		<set name="icon" val="icon.skillraid" /> 
+		<set name="magicLvl" val="1" /> 
+		<set name="operateType" val="P" /> 
 		<set name="targetType" val="SELF" />
 	</skill>
 	<skill id="6653" levels="1" name="Level 85 Raid Boss">
-		<!-- This Skill Is Only For Description In The Client -->
-		<set name="magicLvl" val="1" />
-		<set name="operateType" val="P" />
+		<!-- Confirmed CT2.5 --> 
+		<set name="icon" val="icon.skillraid" /> 
+		<set name="magicLvl" val="1" /> 
+		<set name="operateType" val="P" /> 
 		<set name="targetType" val="SELF" />
 	</skill>
 	<skill id="6654" levels="1" name="Level 85 Raid Boss">
-		<!-- This Skill Is Only For Description In The Client -->
-		<set name="magicLvl" val="1" />
-		<set name="operateType" val="P" />
+		<!-- Confirmed CT2.5 --> 
+		<set name="icon" val="icon.skillraid" /> 
+		<set name="magicLvl" val="1" /> 
+		<set name="operateType" val="P" /> 
 		<set name="targetType" val="SELF" />
 	</skill>
 	<skill id="6655" levels="1" name="Tarsque Carapace">
@@ -682,38 +685,62 @@
 		<set name="targetType" val="NONE" />
 	</skill>
 	<skill id="6656" levels="1" name="Lavasaurus Firstborn Attack">
+		<set name="affectLimit" val="3-6" />
+		<set name="affectRange" val="200" />
+		<set name="castRange" val="700" />
+		<set name="effectRange" val="1200" />
+		<set name="element" val="0" /> <!-- Fire -->
+		<set name="elementPower" val="20" />
+		<set name="hitTime" val="2000" />
+		<set name="isMagic" val="1" /> <!-- Magic Skill -->
+		<set name="magicLvl" val="85" />
+		<set name="mpConsume" val="72" />
+		<set name="offensive" val="true" />
 		<set name="operateType" val="A1" />
-		<set name="skillType" val="NOTDONE" />
-		<set name="targetType" val="NONE" />
+		<set name="power" val="197" />
+		<set name="reuseDelay" val="2000" />
+		<set name="skillType" val="MDAM" />
+		<set name="targetType" val="AREA" />
 	</skill>
 	<skill id="6657" levels="1" name="Lavasaurus Firstborn Heal">
-		<set name="isMagic" val="1" /> <!-- Magic Skill -->
-		<set name="operateType" val="A1" />
-		<set name="skillType" val="NOTDONE" />
-		<set name="targetType" val="NONE" />
+		<!-- Confirmed CT2.5 -->
+		<set name="aggroPoints" val="100" />
+		<set name="castRange" val="600" />
+		<set name="effectRange" val="1000" />
+		<set name="hitTime" val="2000" />
+		<set name="magicLvl" val="85" />
+		<set name="operateType" val="A2" />
+		<set name="targetType" val="CLAN" />
+		<for>
+			<effect name="Heal" noicon="1" val="1000" />
+		</for>
 	</skill>
 	<skill id="6658" levels="1" name="Level 84 Raid Boss">
-		<!-- This Skill Is Only For Description In The Client -->
-		<set name="magicLvl" val="1" />
-		<set name="operateType" val="P" />
+		<!-- Confirmed CT2.5 --> 
+		<set name="icon" val="icon.skillraid" /> 
+		<set name="magicLvl" val="1" /> 
+		<set name="operateType" val="P" /> 
 		<set name="targetType" val="SELF" />
 	</skill>
 	<skill id="6659" levels="1" name="Level 84 Raid Boss">
-		<!-- This Skill Is Only For Description In The Client -->
-		<set name="magicLvl" val="1" />
-		<set name="operateType" val="P" />
+		<!-- Confirmed CT2.5 --> 
+		<set name="icon" val="icon.skillraid" /> 
+		<set name="magicLvl" val="1" /> 
+		<set name="operateType" val="P" /> 
 		<set name="targetType" val="SELF" />
 	</skill>
 	<skill id="6660" levels="1" name="Level 84 Raid Boss">
-		<!-- This Skill Is Only For Description In The Client -->
-		<set name="magicLvl" val="1" />
-		<set name="operateType" val="P" />
+		<!-- Confirmed CT2.5 --> 
+		<set name="icon" val="icon.skillraid" /> 
+		<set name="magicLvl" val="1" /> 
+		<set name="operateType" val="P" /> 
 		<set name="targetType" val="SELF" />
 	</skill>
 	<skill id="6661" levels="1" name="Level 85 Raid Boss">
-		<!-- This Skill Is Only For Description In The Client -->
-		<set name="magicLvl" val="1" />
-		<set name="operateType" val="P" />
+		<!-- Confirmed CT2.5 --> 
+		<set name="icon" val="icon.skillraid" /> 
+		<set name="magicLvl" val="1" /> 
+		<set name="operateType" val="P" /> 
 		<set name="targetType" val="SELF" />
 	</skill>
 	<skill id="6662" levels="2" name="Pillar of Frozen">
@@ -750,15 +777,17 @@
 		</for>
 	</skill>
 	<skill id="6663" levels="1" name="Level 76 Raid Boss">
-		<!-- This Skill Is Only For Description In The Client -->
-		<set name="magicLvl" val="1" />
-		<set name="operateType" val="P" />
+		<!-- Confirmed CT2.5 --> 
+		<set name="icon" val="icon.skillraid" /> 
+		<set name="magicLvl" val="1" /> 
+		<set name="operateType" val="P" /> 
 		<set name="targetType" val="SELF" />
 	</skill>
 	<skill id="6664" levels="1" name="Level 84 Raid Boss">
-		<!-- This Skill Is Only For Description In The Client -->
-		<set name="magicLvl" val="1" />
-		<set name="operateType" val="P" />
+		<!-- Confirmed CT2.5 --> 
+		<set name="icon" val="icon.skillraid" /> 
+		<set name="magicLvl" val="1" /> 
+		<set name="operateType" val="P" /> 
 		<set name="targetType" val="SELF" />
 	</skill>
 	<skill id="6665" levels="1" name="NPC Hate">
@@ -940,9 +969,22 @@
 		</for>
 	</skill>
 	<skill id="6675" levels="1" name="Lavasaurus Firstborn Attack">
+		<set name="affectLimit" val="3-6" />
+		<set name="affectRange" val="200" />
+		<set name="castRange" val="700" />
+		<set name="effectRange" val="1200" />
+		<set name="element" val="0" /> <!-- Fire -->
+		<set name="elementPower" val="20" />
+		<set name="hitTime" val="2000" />
+		<set name="isMagic" val="1" /> <!-- Magic Skill -->
+		<set name="magicLvl" val="85" />
+		<set name="mpConsume" val="72" />
+		<set name="offensive" val="true" />
 		<set name="operateType" val="A1" />
-		<set name="skillType" val="NOTDONE" />
-		<set name="targetType" val="NONE" />
+		<set name="power" val="197" />
+		<set name="reuseDelay" val="2000" />
+		<set name="skillType" val="MDAM" />
+		<set name="targetType" val="AREA" />
 	</skill>
 	<skill id="6676" levels="1" name="Magician's Perversity">
 		<set name="castRange" val="900" />

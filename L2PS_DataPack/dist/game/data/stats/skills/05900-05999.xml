@@ -347,8 +347,16 @@
 		<set name="isMagic" val="1" /> <!-- Magic Skill -->
 		<set name="operateType" val="A2" />
 		<set name="reuseDelay" val="1000" />
-		<set name="skillType" val="NOTDONE" />
-		<set name="targetType" val="NONE" />
+		<set name="skillType" val="BUFF" />
+		<set name="targetType" val="SELF" /> 
+		<for> 
+			<effect name="Buff" abnormalTime="10800" val="0" abnormalLvl="1" abnormalType="ma_up" > 
+				<mul order="0x30" stat="pDef" val="0.95" /> 
+				<mul order="0x30" stat="mDef" val="0.95" /> 
+				<mul order="0x50" stat="regHp" val="0.95" /> 
+				<mul order="0x30" stat="mAtk" val="1.03" /> 
+			</effect> 
+		</for>
 	</skill>
 	<skill id="5924" levels="1" name="Devour Soul">
 		<set name="hitTime" val="5000" />
@@ -465,10 +473,19 @@
 		<set name="abnormalLvl" val="1" />
 		<set name="abnormalTime" val="30" />
 		<set name="abnormalType" val="armor_earth" />
+		<set name="magicLvl" val="81" />
+		<set name="mpConsume" val="90" />
+		<set name="reuseDelay" val="300" />
 		<set name="isMagic" val="1" /> <!-- Magic Skill -->
 		<set name="operateType" val="A2" />
-		<set name="skillType" val="NOTDONE" />
-		<set name="targetType" val="NONE" />
+		<set name="skillType" val="BUFF" />
+		<set name="targetType" val="SELF" />
+		<for>
+			<effect name="Buff" abnormalTime="30" val="0" abnormalLvl="1" abnormalType="armor_earth">
+				<add order="0x40" stat="darkRes" val="180" />
+				<add order="0x40" stat="holyRes" val="180" />
+			</effect>
+		</for>
 	</skill>
 	<skill id="5935" levels="1" name="Dark Ring">
 		<!-- Confirmed CT2.5 -->

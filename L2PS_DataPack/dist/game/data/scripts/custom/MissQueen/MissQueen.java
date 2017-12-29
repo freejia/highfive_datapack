@@ -29,8 +29,6 @@ import com.l2jserver.gameserver.model.quest.QuestState;
  */
 public class MissQueen extends Quest
 {
-	private static final String qn = "MissQueen";
-	
 	private static final int COUPNE_ONE = 7832;
 	private static final int COUPNE_TWO = 7833;
 	
@@ -78,7 +76,7 @@ public class MissQueen extends Quest
 			return htmltext;
 		}
 		
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		int newbie = player.getNewbie();
 		int level = player.getLevel();
 		int occupation_level = player.getClassId().level();
@@ -133,7 +131,7 @@ public class MissQueen extends Quest
 	@Override
 	public String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -143,6 +141,6 @@ public class MissQueen extends Quest
 	
 	public static void main(String args[])
 	{
-		new MissQueen(-1, qn, "custom");
+		new MissQueen(-1, MissQueen.class.getSimpleName(), "custom");
 	}
 }

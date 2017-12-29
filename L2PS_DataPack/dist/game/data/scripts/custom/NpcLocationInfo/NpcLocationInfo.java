@@ -32,8 +32,6 @@ import com.l2jserver.gameserver.util.Util;
  */
 public class NpcLocationInfo extends Quest
 {
-	private static final String qn = "NpcLocationInfo";
-	
 	private static final int[] NPC =
 	{
 		30598,
@@ -269,7 +267,7 @@ public class NpcLocationInfo extends Quest
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
 		String htmltext = event;
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		
 		if (st == null)
 		{
@@ -323,6 +321,6 @@ public class NpcLocationInfo extends Quest
 	
 	public static void main(String args[])
 	{
-		new NpcLocationInfo(-1, qn, "custom");
+		new NpcLocationInfo(-1, NpcLocationInfo.class.getSimpleName(), "custom");
 	}
 }

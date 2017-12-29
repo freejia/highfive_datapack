@@ -29,8 +29,7 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
 /**
- * Love Your Gatekeeper event.
- * @author Gladicek
+ * @author RobíkBobík
  */
 public class LoveYourGatekeeper extends LongTimeEvent
 {

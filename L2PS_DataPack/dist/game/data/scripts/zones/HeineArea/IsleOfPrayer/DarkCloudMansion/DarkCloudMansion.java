@@ -37,13 +37,13 @@ import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.MagicSkillUse;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
+import com.l2jserver.util.Rnd;
 
 /**
  * Dark Cloud Mansion instance zone.
  */
 public class DarkCloudMansion extends Quest
 {
-	private static String qn = "DarkCloudMansion";
 	private static final int INSTANCEID = 9;
 	
 	private static boolean debug = false;
@@ -566,7 +566,7 @@ public class DarkCloudMansion extends Quest
 		{
 			for (L2PcInstance partyMember : party.getMembers())
 			{
-				if (partyMember.getQuestState(qn) == null)
+				if (partyMember.getQuestState(getName()) == null)
 				{
 					newQuestState(partyMember);
 				}
@@ -973,7 +973,7 @@ public class DarkCloudMansion extends Quest
 		DMCRoom FifthRoom = new DMCRoom();
 		DMCNpc thisnpc;
 		
-		temp = Beleths[getRandom(Beleths.length)];
+		temp = Beleths[Rnd.get(Beleths.length)];
 		
 		FifthRoom.reset = 0;
 		FifthRoom.founded = 0;
@@ -987,13 +987,13 @@ public class DarkCloudMansion extends Quest
 			thisnpc.status = temp[idx];
 			thisnpc.count = 0;
 			FifthRoom.npcList.add(thisnpc);
-			if ((temp[idx] == 1) && (getRandom(100) < 95))
+			if ((temp[idx] == 1) && (Rnd.get(100) < 95))
 			{
-				thisnpc.npc.broadcastPacket(new NpcSay(thisnpc.npc.getObjectId(), 0, thisnpc.npc.getNpcId(), _spawnChat[getRandom(_spawnChat.length)]));
+				thisnpc.npc.broadcastPacket(new NpcSay(thisnpc.npc.getObjectId(), 0, thisnpc.npc.getNpcId(), _spawnChat[Rnd.get(_spawnChat.length)]));
 			}
-			else if ((temp[idx] != 1) && (getRandom(100) < 67))
+			else if ((temp[idx] != 1) && (Rnd.get(100) < 67))
 			{
-				thisnpc.npc.broadcastPacket(new NpcSay(thisnpc.npc.getObjectId(), 0, thisnpc.npc.getNpcId(), _spawnChat[getRandom(_spawnChat.length)]));
+				thisnpc.npc.broadcastPacket(new NpcSay(thisnpc.npc.getObjectId(), 0, thisnpc.npc.getNpcId(), _spawnChat[Rnd.get(_spawnChat.length)]));
 			}
 			idx++;
 		}
@@ -1415,7 +1415,7 @@ public class DarkCloudMansion extends Quest
 			if ((npc.getNpcId() == SOTruth) && (world.getStatus() == 10))
 			{
 				npc.showChatWindow(player);
-				QuestState st = player.getQuestState(qn);
+				QuestState st = player.getQuestState(getName());
 				if (st == null)
 				{
 					st = newQuestState(player);
@@ -1477,6 +1477,6 @@ public class DarkCloudMansion extends Quest
 	
 	public static void main(String[] args)
 	{
-		new DarkCloudMansion(-1, qn, "zones/HeineArea/IsleOfPrayer/");
+		new DarkCloudMansion(-1, DarkCloudMansion.class.getSimpleName(), "zones/HeineArea/IsleOfPrayer/");
 	}
 }

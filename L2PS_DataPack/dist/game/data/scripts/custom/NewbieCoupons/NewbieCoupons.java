@@ -31,8 +31,6 @@ import com.l2jserver.gameserver.model.quest.QuestState;
  */
 public class NewbieCoupons extends Quest
 {
-	private static final String qn = "NewbieCoupons";
-	
 	private static final int COUPON_ONE = 7832;
 	private static final int COUPON_TWO = 7833;
 	
@@ -81,7 +79,7 @@ public class NewbieCoupons extends Quest
 			return htmltext;
 		}
 		
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		int newbie = player.getNewbie();
 		int level = player.getLevel();
 		int occupation_level = player.getClassId().level();
@@ -156,7 +154,7 @@ public class NewbieCoupons extends Quest
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -167,6 +165,6 @@ public class NewbieCoupons extends Quest
 	
 	public static void main(String args[])
 	{
-		new NewbieCoupons(-1, qn, "custom");
+		new NewbieCoupons(-1, NewbieCoupons.class.getSimpleName(), "custom");
 	}
 }

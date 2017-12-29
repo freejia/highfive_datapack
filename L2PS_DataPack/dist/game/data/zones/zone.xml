@@ -153,10 +153,4 @@
 		<stat name="targetClass" val="L2Character" />
 		<node X="71543" Y="-128820" />
 	</zone>
-	<zone name="Custom" type="MultiFunctionZone" shape="NPoly" minZ="-15000" maxZ="-10000">
-		<node X="130000" Y="160000" />
-		<node X="130000" Y="130000" />
-		<node X="160000" Y="130000" />
-		<node X="160000" Y="160000" />
-	</zone>
 </list>

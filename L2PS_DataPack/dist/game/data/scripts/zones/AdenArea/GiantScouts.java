@@ -23,68 +23,100 @@ import java.util.Collection;
 import ai.npc.AbstractNpcAI;
 
 import com.l2jserver.gameserver.GeoData;
-import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
-import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.clientpackets.Say2;
-import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
+import com.l2jserver.gameserver.network.serverpackets.NpcSay;
+import com.l2jserver.gameserver.util.Util;
 
 /**
  * Giant Scouts AI.
  * @author Gnacik
  */
-public class GiantScouts extends AbstractNpcAI
+public final class GiantScouts extends AbstractNpcAI
 {
+	private static final int[] SCOUTS =
+	{
+		22668, // Gamlin (Scout)
+		22669, // Leogul (Scout)
+	};
+	
 	private GiantScouts()
 	{
 		super(GiantScouts.class.getSimpleName(), "zones/AdenArea/");
-		addAggroRangeEnterId(22668, 22669); // scouts
+		addAttackId(SCOUTS);
+		addSeeCreatureId(SCOUTS);
 	}
 	
 	@Override
-	public String onAggroRangeEnter(L2Npc npc, L2PcInstance player, boolean isSummon)
+	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
-		L2Character target = isSummon ? player.getSummon() : player;
-		
-		if (GeoData.getInstance().canSeeTarget(npc, target))
+		if (event.equals("ATTACK") && (npc != null) && !npc.isDead())
 		{
-			if (!npc.isInCombat() && (npc.getTarget() == null))
+			if (npc.getNpcId() == SCOUTS[1]) // Gamlin
 			{
-				npc.broadcastPacket(new CreatureSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getName(), NpcStringId.OH_GIANTS_AN_INTRUDER_HAS_BEEN_DISCOVERED));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getNpcId(), NpcStringId._INTRUDER_DETECTED));
+			}
+			else
+			{
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getNpcId(), NpcStringId.OH_GIANTS_AN_INTRUDER_HAS_BEEN_DISCOVERED));
 			}
 			
-			npc.setTarget(target);
-			npc.setRunning();
-			((L2Attackable) npc).addDamageHate(target, 0, 999);
-			npc.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, target);
-			
-			// Notify clan
+			attackPlayer((L2Attackable) npc, player);
 			Collection<L2Object> objs = npc.getKnownList().getKnownObjects().values();
 			for (L2Object obj : objs)
 			{
-				if (obj != null)
+				if ((obj != null) && (obj instanceof L2Attackable) && Util.checkIfInRange(450, player, obj, true) && GeoData.getInstance().canSeeTarget(npc, obj) && (getRandomBoolean()))
+				
 				{
-					if (obj instanceof L2MonsterInstance)
-					{
-						L2MonsterInstance monster = (L2MonsterInstance) obj;
-						if (((npc.getClan() != null) && (monster.getClan() != null)) && monster.getClan().equals(npc.getClan()) && GeoData.getInstance().canSeeTarget(npc, monster))
-						{
-							monster.setTarget(target);
-							monster.setRunning();
-							monster.addDamageHate(target, 0, 999);
-							monster.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, target);
-						}
-					}
+					L2Attackable monster = (L2Attackable) obj;
+					monster.setTarget(player);
+					attackPlayer(monster, player);
 					
 				}
 			}
 		}
-		return super.onAggroRangeEnter(npc, player, isSummon);
+		else if (event.equals("CLEAR") && (npc != null) && !npc.isDead())
+		{
+			npc.setScriptValue(0);
+		}
+		return super.onAdvEvent(event, npc, player);
+	}
+	
+	@Override
+	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isSummon)
+	{
+		if (npc.isScriptValue(0))
+		{
+			npc.setScriptValue(1);
+			startQuestTimer("ATTACK", 6000, npc, null);
+			startQuestTimer("CLEAR", 120000, npc, null);
+		}
+		return super.onAttack(npc, attacker, damage, isSummon);
+	}
+	
+	@Override
+	public String onSeeCreature(L2Npc npc, L2Character creature, boolean isSummon)
+	{
+		if (creature.isPlayer() && npc.isScriptValue(0))
+		{
+			npc.setScriptValue(1);
+			if (getRandomBoolean())
+			{
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getNpcId(), NpcStringId.YOU_GUYS_ARE_DETECTED));
+			}
+			else
+			{
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getNpcId(), NpcStringId.WHAT_KIND_OF_CREATURES_ARE_YOU));
+			}
+			startQuestTimer("ATTACK", 6000, npc, null);
+			startQuestTimer("CLEAR", 120000, npc, null);
+		}
+		return super.onSeeCreature(npc, creature, isSummon);
 	}
 	
 	public static void main(String[] args)

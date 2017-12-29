@@ -159,6 +159,7 @@
 		<set name="reuseDelay" val="10000" />
 		<set name="skillType" val="CONFUSE_MOB_ONLY" />
 		<set name="targetType" val="ONE" />
+		<set name="pvp" val="true" />
 		<for>
 			<effect count="5" name="Confusion" abnormalTime="4" val="0" />
 		</for>
@@ -941,6 +942,7 @@
 		<set name="reuseDelay" val="10000" />
 		<set name="skillType" val="CONFUSE_MOB_ONLY" />
 		<set name="targetType" val="ONE" />
+		<set name="pvp" val="true" />
 		<for>
 			<effect count="5" name="ConfuseMob" abnormalTime="4" val="0" />
 		</for>
@@ -1502,6 +1504,7 @@
 		<set name="saveVs" val="MEN" />
 		<set name="skillType" val="MDAM" />
 		<set name="targetType" val="ONE" />
+		<set name="pvp" val="true" />
 		<for>
 			<effect name="Debuff" abnormalTime="60" val="0" effectPower="60" abnormalLvl="2" abnormalType="speed_down">
 				<mul order="0x30" stat="runSpd" val="0.8" />

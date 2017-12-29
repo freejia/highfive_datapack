@@ -17,30 +17,67 @@ package events.SquashEvent;
 import com.l2jserver.FunEvents;
 import com.l2jserver.gameserver.instancemanager.QuestManager;
 import com.l2jserver.gameserver.model.L2Object;
-import com.l2jserver.gameserver.model.skills.L2Skill;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
+import com.l2jserver.gameserver.model.skills.L2Skill;
 import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.util.Rnd;
 
 /**
- * @Fixed by L2Ps Team
- * www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class SquashEvent extends Quest
 {
-	private static final String qn = "SquashEvent";
 	private static final int MANAGER = 31860;
 	private static final int NECTAR_SKILL = 2005;
-	private static final int[] CHRONO_LIST = { 4202 , 5133 , 5817 , 7058 , 8350 };
-	private static final int[] SQUASH_LIST = { 12774 , 12775 , 12776 , 12777 , 12778 , 12779 , 13016 , 13017 };
-	private static final String[] _NOCHRONO_TEXT = { "You cannot kill me without Chrono", "Hehe...keep trying...", "Nice try...", "Tired ?", "Go go ! haha..." };
-	private static final String[] _CHRONO_TEXT = { "Arghh... Chrono weapon...", "My end is coming...", "Please leave me!", "Heeellpppp...", "Somebody help me please..." };
-	private static final String[] _NECTAR_TEXT = { "Yummie... Nectar...", "Plase give me more...", "Hmmm.. More.. I need more...", "I would like you more, if you give me more...", "Hmmmmmmm...", "My favourite..." };
+	private static final int[] CHRONO_LIST =
+	{
+		4202,
+		5133,
+		5817,
+		7058,
+		8350
+	};
+	private static final int[] SQUASH_LIST =
+	{
+		12774,
+		12775,
+		12776,
+		12777,
+		12778,
+		12779,
+		13016,
+		13017
+	};
+	private static final String[] _NOCHRONO_TEXT =
+	{
+		"You cannot kill me without Chrono",
+		"Hehe...keep trying...",
+		"Nice try...",
+		"Tired ?",
+		"Go go ! haha..."
+	};
+	private static final String[] _CHRONO_TEXT =
+	{
+		"Arghh... Chrono weapon...",
+		"My end is coming...",
+		"Please leave me!",
+		"Heeellpppp...",
+		"Somebody help me please..."
+	};
+	private static final String[] _NECTAR_TEXT =
+	{
+		"Yummie... Nectar...",
+		"Plase give me more...",
+		"Hmmm.. More.. I need more...",
+		"I would like you more, if you give me more...",
+		"Hmmmmmmm...",
+		"My favourite..."
+	};
 	private static final int Adena = 57;
 	private static final int Crystal_A_Grade = 1461;
 	private static final int Crystal_S_Grade = 1462;
@@ -66,83 +103,290 @@ public class SquashEvent extends Quest
 	private static final int[][] DROPLIST =
 	{
 		// High Quality Young Squash
-		{ 12775, Baguette_Herb_2, 100 },
-		{ 12775, Energy_Ginseng, 100 },
-		{ 12775, Gems_S_Grade, 80 },
-		{ 12775, Crystal_S_Grade, 80 },
-		{ 12775, Quick_Healing_Potion, 75 },
-		{ 12775, Large_Lucky_cub, 50 },
-		{ 12775, Adena, 100 },
+		{
+			12775,
+			Baguette_Herb_2,
+			100
+		},
+		{
+			12775,
+			Energy_Ginseng,
+			100
+		},
+		{
+			12775,
+			Gems_S_Grade,
+			80
+		},
+		{
+			12775,
+			Crystal_S_Grade,
+			80
+		},
+		{
+			12775,
+			Quick_Healing_Potion,
+			75
+		},
+		{
+			12775,
+			Large_Lucky_cub,
+			50
+		},
+		{
+			12775,
+			Adena,
+			100
+		},
 		
 		// Low Quality Young Squash
-		{ 12776, Baguette_Herb_3, 100 },
-		{ 12776, Quick_Healing_Potion, 70 },
-		{ 12776, Gems_A_Grade, 80 },
-		{ 12776, Crystal_A_Grade, 100 },
-		{ 12776, High_Grade_LS76, 10 },
-		{ 12776, Adena, 100 },
+		{
+			12776,
+			Baguette_Herb_3,
+			100
+		},
+		{
+			12776,
+			Quick_Healing_Potion,
+			70
+		},
+		{
+			12776,
+			Gems_A_Grade,
+			80
+		},
+		{
+			12776,
+			Crystal_A_Grade,
+			100
+		},
+		{
+			12776,
+			High_Grade_LS76,
+			10
+		},
+		{
+			12776,
+			Adena,
+			100
+		},
 		
 		// High Quality Large Squash
-		{ 12778, Baguette_Herb_2, 100 },
-		{ 12778, Adena, 100 },
-		{ 12778, Top_Grade_LS76, 35 },
-		{ 12778, Giant_Codex, 10 },
-		{ 12778, Quick_Healing_Potion, 60 },
-		{ 12778, Gems_S_Grade, 80 },
-		{ 12778, Crystal_S_Grade, 100 },
-		{ 12778, Energy_Ginseng, 100 },
-		{ 12778, Large_Lucky_cub, 60 },
+		{
+			12778,
+			Baguette_Herb_2,
+			100
+		},
+		{
+			12778,
+			Adena,
+			100
+		},
+		{
+			12778,
+			Top_Grade_LS76,
+			35
+		},
+		{
+			12778,
+			Giant_Codex,
+			10
+		},
+		{
+			12778,
+			Quick_Healing_Potion,
+			60
+		},
+		{
+			12778,
+			Gems_S_Grade,
+			80
+		},
+		{
+			12778,
+			Crystal_S_Grade,
+			100
+		},
+		{
+			12778,
+			Energy_Ginseng,
+			100
+		},
+		{
+			12778,
+			Large_Lucky_cub,
+			60
+		},
 		
 		// Low Quality Large Squash
-		{ 12779, Baguette_Herb_3, 100 },
-		{ 12779, Adena, 100 },
-		{ 12779, High_Grade_LS76, 10 },
-		{ 12779, Quick_Healing_Potion, 60 },
-		{ 12779, Energy_Ginseng, 70 },
-		{ 12779, Gems_A_Grade, 100 },
+		{
+			12779,
+			Baguette_Herb_3,
+			100
+		},
+		{
+			12779,
+			Adena,
+			100
+		},
+		{
+			12779,
+			High_Grade_LS76,
+			10
+		},
+		{
+			12779,
+			Quick_Healing_Potion,
+			60
+		},
+		{
+			12779,
+			Energy_Ginseng,
+			70
+		},
+		{
+			12779,
+			Gems_A_Grade,
+			100
+		},
 		
 		// King Squash
-		{ 13016, Adena, 100 },
-		{ 13016, Quick_Healing_Potion, 100 },
-		{ 13016, Crystal_S_Grade, 10 },
-		{ 13016, Giant_Codex, 10 },
-		{ 13016, Lunargent, 15 },
-		{ 13016, High_Grade_LS76, 50 },
-		{ 13016, Firework, 100 },
-		{ 13016, Baguette_Herb_1, 100 },
-		{ 13016, Baguette_Herb_2, 80 },
-		{ 13016, Blessed_SOE, 80 },
-		{ 13016, Energy_Ginseng, 100 },
-		{ 13016, Ancient_Enchant_Weapon_A, 5 },
-		
+		{
+			13016,
+			Adena,
+			100
+		},
+		{
+			13016,
+			Quick_Healing_Potion,
+			100
+		},
+		{
+			13016,
+			Crystal_S_Grade,
+			10
+		},
+		{
+			13016,
+			Giant_Codex,
+			10
+		},
+		{
+			13016,
+			Lunargent,
+			15
+		},
+		{
+			13016,
+			High_Grade_LS76,
+			50
+		},
+		{
+			13016,
+			Firework,
+			100
+		},
+		{
+			13016,
+			Baguette_Herb_1,
+			100
+		},
+		{
+			13016,
+			Baguette_Herb_2,
+			80
+		},
+		{
+			13016,
+			Blessed_SOE,
+			80
+		},
+		{
+			13016,
+			Energy_Ginseng,
+			100
+		},
+		{
+			13016,
+			Ancient_Enchant_Weapon_A,
+			5
+		},
 		
 		// Emperor Squash
-		{ 13017, Adena, 100 },
-		{ 13017, Top_Grade_LS76, 10 },
-		{ 13017, Gems_S_Grade, 100 },
-		{ 13017, Crystal_S_Grade, 100 },
-		{ 13017, Hellfire_oil, 5 },
-		{ 13017, Energy_Ginseng, 100 },
-		{ 13017, Blessed_SOE, 70 },
-		{ 13017, Giant_Codex, 30 },
-		{ 13017, Large_Firework, 100 },
-		{ 13017, Ancient_Enchant_Armour_A, 10 },
-		{ 13017, Baguette_Herb_2, 100 },
-		{ 13017, Baguette_Herb_3, 100 }
+		{
+			13017,
+			Adena,
+			100
+		},
+		{
+			13017,
+			Top_Grade_LS76,
+			10
+		},
+		{
+			13017,
+			Gems_S_Grade,
+			100
+		},
+		{
+			13017,
+			Crystal_S_Grade,
+			100
+		},
+		{
+			13017,
+			Hellfire_oil,
+			5
+		},
+		{
+			13017,
+			Energy_Ginseng,
+			100
+		},
+		{
+			13017,
+			Blessed_SOE,
+			70
+		},
+		{
+			13017,
+			Giant_Codex,
+			30
+		},
+		{
+			13017,
+			Large_Firework,
+			100
+		},
+		{
+			13017,
+			Ancient_Enchant_Armour_A,
+			10
+		},
+		{
+			13017,
+			Baguette_Herb_2,
+			100
+		},
+		{
+			13017,
+			Baguette_Herb_3,
+			100
+		}
 	};
 	
 	@Override
 	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
 	{
-		if (contains(SQUASH_LIST,npc.getNpcId()))
+		if (contains(SQUASH_LIST, npc.getNpcId()))
 		{
-			if(isPet)
+			if (isPet)
 			{
 				noChronoText(npc);
 				npc.setIsInvul(true);
 				return null;
 			}
-			if(attacker.getActiveWeaponItem() != null && contains(CHRONO_LIST, attacker.getActiveWeaponItem().getItemId()))
+			if ((attacker.getActiveWeaponItem() != null) && contains(CHRONO_LIST, attacker.getActiveWeaponItem().getItemId()))
 			{
 				ChronoText(npc);
 				npc.setIsInvul(false);
@@ -161,7 +405,7 @@ public class SquashEvent extends Quest
 	{
 		if (contains(targets, npc) && contains(SQUASH_LIST, npc.getNpcId()) && (skill.getId() == NECTAR_SKILL))
 		{
-			switch(npc.getNpcId())
+			switch (npc.getNpcId())
 			{
 				case 12774:
 					randomSpawn(12775, 12776, npc, true);
@@ -185,7 +429,7 @@ public class SquashEvent extends Quest
 	{
 		if (FunEvents.SQUASH_DROP_ACTIVE)
 		{
-			for (int ID: SQUASH_LIST)
+			for (int ID : SQUASH_LIST)
 			{
 				if (npc.getNpcId() == ID)
 				{
@@ -197,7 +441,7 @@ public class SquashEvent extends Quest
 	}
 	
 	@Override
-	public String onSpawn(L2Npc npc) 
+	public String onSpawn(L2Npc npc)
 	{
 		npc.setIsImmobilized(true);
 		npc.disableCoreAI(true);
@@ -208,42 +452,43 @@ public class SquashEvent extends Quest
 	{
 		final int npcId = mob.getNpcId();
 		final int chance = Rnd.get(100);
-		for (int i = 0; i < DROPLIST.length; i++)
+		for (int[] drop : DROPLIST)
 		{
-			int[] drop = DROPLIST[i];
 			if (npcId == drop[0])
 			{
 				if (chance < drop[2])
 				{
-					if(drop[1] > 6000)
+					if (drop[1] > 6000)
 					{
-						int adenaCount = Rnd.get(50000,150000);
+						int adenaCount = Rnd.get(50000, 150000);
 						if (drop[1] == 57)
 						{
-							((L2MonsterInstance)mob).dropItem(player, drop[1], adenaCount);
+							((L2MonsterInstance) mob).dropItem(player, drop[1], adenaCount);
 						}
 						else
 						{
-							((L2MonsterInstance)mob).dropItem(player, drop[1], 1);
+							((L2MonsterInstance) mob).dropItem(player, drop[1], 1);
 						}
 					}
 					else
 					{
-						int adenaCount = Rnd.get(50000,200000);
+						int adenaCount = Rnd.get(50000, 200000);
 						if (drop[1] == 57)
 						{
-							((L2MonsterInstance)mob).dropItem(player, drop[1], adenaCount);
+							((L2MonsterInstance) mob).dropItem(player, drop[1], adenaCount);
 						}
 						else
 						{
-							((L2MonsterInstance)mob).dropItem(player, drop[1], Rnd.get(2, 6));
+							((L2MonsterInstance) mob).dropItem(player, drop[1], Rnd.get(2, 6));
 						}
 					}
 					continue;
 				}
 			}
 			if (npcId < drop[0])
+			{
 				return;
+			}
 		}
 	}
 	
@@ -251,35 +496,53 @@ public class SquashEvent extends Quest
 	{
 		final int _random = Rnd.get(100);
 		if (_random < 10)
+		{
 			spawnNext(lower, npc);
-		else if(_random < 30)
+		}
+		else if (_random < 30)
+		{
 			spawnNext(higher, npc);
+		}
 		else
+		{
 			nectarText(npc);
+		}
 	}
 	
 	private void randomSpawn(int npcId, L2Npc npc, boolean delete)
 	{
-		if(Rnd.get(100) < 10)
+		if (Rnd.get(100) < 10)
+		{
 			spawnNext(npcId, npc);
+		}
 		else
+		{
 			nectarText(npc);
+		}
 	}
 	
 	private void ChronoText(L2Npc npc)
 	{
-		if(Rnd.get(100) < 20)
-			npc.broadcastPacket(new CreatureSay(npc.getObjectId(), Say2.ALL, npc.getName(), _CHRONO_TEXT[Rnd.get(_CHRONO_TEXT.length)]));           
+		if (Rnd.get(100) < 20)
+		{
+			npc.broadcastPacket(new CreatureSay(npc.getObjectId(), Say2.ALL, npc.getName(), _CHRONO_TEXT[Rnd.get(_CHRONO_TEXT.length)]));
+		}
 	}
+	
 	private void noChronoText(L2Npc npc)
 	{
-		if(Rnd.get(100) < 20)
-			npc.broadcastPacket(new CreatureSay(npc.getObjectId(), Say2.ALL, npc.getName(), _NOCHRONO_TEXT[Rnd.get(_NOCHRONO_TEXT.length)]));               
+		if (Rnd.get(100) < 20)
+		{
+			npc.broadcastPacket(new CreatureSay(npc.getObjectId(), Say2.ALL, npc.getName(), _NOCHRONO_TEXT[Rnd.get(_NOCHRONO_TEXT.length)]));
+		}
 	}
+	
 	private void nectarText(L2Npc npc)
 	{
-		if(Rnd.get(100) < 30)
+		if (Rnd.get(100) < 30)
+		{
 			npc.broadcastPacket(new CreatureSay(npc.getObjectId(), Say2.ALL, npc.getName(), _NECTAR_TEXT[Rnd.get(_NECTAR_TEXT.length)]));
+		}
 	}
 	
 	private void spawnNext(int npcId, L2Npc npc)
@@ -287,12 +550,12 @@ public class SquashEvent extends Quest
 		addSpawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), false, 60000);
 		npc.deleteMe();
 	}
-
+	
 	public static <T> boolean contains(T[] array, T obj)
 	{
-		for (int i = 0; i < array.length; i++)
+		for (T element : array)
 		{
-			if (array[i] == obj)
+			if (element == obj)
 			{
 				return true;
 			}
@@ -302,9 +565,9 @@ public class SquashEvent extends Quest
 	
 	public static boolean contains(int[] array, int obj)
 	{
-		for (int i = 0; i < array.length; i++)
+		for (int element : array)
 		{
-			if (array[i] == obj)
+			if (element == obj)
 			{
 				return true;
 			}
@@ -323,7 +586,7 @@ public class SquashEvent extends Quest
 			addSpawnId(mob);
 			addSkillSeeId(mob);
 		}
-
+		
 		addStartNpc(MANAGER);
 		addFirstTalkId(MANAGER);
 		addTalkId(MANAGER);
@@ -345,8 +608,10 @@ public class SquashEvent extends Quest
 	
 	public static void main(String[] args)
 	{
-		new SquashEvent(-1,qn,"events");
+		new SquashEvent(-1, SquashEvent.class.getSimpleName(), "events");
 		if (FunEvents.SQUASH_STARTED)
+		{
 			_log.info("Event System: Squash Event loaded.");
+		}
 	}
 }

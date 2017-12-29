@@ -709,8 +709,8 @@
 		<set name="effectRange" val="1000" />
 		<set name="hitTime" val="2000" />
 		<set name="magicLvl" val="75" />
-		<set name="operateType" val="A1" />
-		<set name="targetType" val="ONE" />
+		<set name="operateType" val="A2" />
+		<set name="targetType" val="CLAN" />
 		<for>
 			<effect name="Heal" noicon="1" val="1000" />
 		</for>

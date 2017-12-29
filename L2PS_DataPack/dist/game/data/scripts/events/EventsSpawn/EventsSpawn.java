@@ -18,11 +18,10 @@ import com.l2jserver.FunEvents;
 import com.l2jserver.gameserver.model.quest.Quest;
 
 /**
- * @Fixed by L2Ps Team www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class EventsSpawn extends Quest
 {
-	private static final String qn = "EventsSpawn";
 	private static final boolean HC_SPAWN = FunEvents.HC_STARTED;
 	private static final int FARMER = 13183;
 	private static final int HC_SpawnLocs[][] =
@@ -431,7 +430,7 @@ public class EventsSpawn extends Quest
 	
 	public static void main(String[] args)
 	{
-		new EventsSpawn(-1, qn, "events");
+		new EventsSpawn(-1, EventsSpawn.class.getSimpleName(), "events");
 		_log.warning("Events System: Spawn Events Npcs");
 	}
 }

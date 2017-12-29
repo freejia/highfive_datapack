@@ -982,10 +982,10 @@
 		<set name="abnormalLvl" val="9" />
 		<set name="abnormalTime" val="15" />
 		<set name="abnormalType" val="dot_attr" />
-		<set name="affectRange" val="150" />
+		<set name="affectRange" val="200" />
+		<set name="affectLimit" val="1-6" />
 		<set name="castRange" val="40" />
 		<set name="coolTime" val="720" />
-		<set name="effectRange" val="400" />
 		<set name="element" val="0" /> <!-- Fire -->
 		<set name="elementPower" val="20" />
 		<set name="hitTime" val="1080" />
@@ -1911,6 +1911,7 @@
 		<set name="saveVs" val="MEN" />
 		<set name="skillType" val="BLOW" />
 		<set name="targetType" val="ONE" />
+		<set name="pvp" val="true" />
 		<cond msgId="113" addName="1">
 			<using kind="Dagger,Dual Dagger" />
 		</cond>

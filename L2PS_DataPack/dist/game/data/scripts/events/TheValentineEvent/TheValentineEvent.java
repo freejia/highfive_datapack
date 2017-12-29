@@ -22,8 +22,7 @@ import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 
 /**
- * @Fixed by L2Ps Team
- * www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class TheValentineEvent extends Quest
 {
@@ -125,6 +124,6 @@ public class TheValentineEvent extends Quest
 	
 	public static void main(String[] args)
 	{
-		new TheValentineEvent(-1, "TheValentineEvent", "events");
+		new TheValentineEvent(-1, TheValentineEvent.class.getSimpleName(), "events");
 	}
 }

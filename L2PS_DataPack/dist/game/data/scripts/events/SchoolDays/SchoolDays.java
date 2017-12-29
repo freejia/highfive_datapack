@@ -24,54 +24,85 @@ import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.util.Rnd;
 
 /**
- * @Fixed by L2Ps Team
- * www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class SchoolDays extends Quest
 {
-	private static final String qn = "SchoolDays";
 	private static final int SCHOOL_DAYS_NPC = 13182;
-	private static final int[] EventMonsters = 
-	{ 
-		7000,7001,7002,7003,7004,7005,7006,7007,7008,7009,
-		7010,7011,7012,7013,7014,7015,7016,7017,7018,7019,
-		7020,7021,7022,7023
+	private static final int[] EventMonsters =
+	{
+		7000,
+		7001,
+		7002,
+		7003,
+		7004,
+		7005,
+		7006,
+		7007,
+		7008,
+		7009,
+		7010,
+		7011,
+		7012,
+		7013,
+		7014,
+		7015,
+		7016,
+		7017,
+		7018,
+		7019,
+		7020,
+		7021,
+		7022,
+		7023
 	};
 	private static final int[] BOOKS_HUMAN =
 	{
-		1372,1397,1401
+		1372,
+		1397,
+		1401
 	};
 	private static final int[] BOOKS_ELF =
 	{
-		1370,1380,1402
+		1370,
+		1380,
+		1402
 	};
 	private static final int[] BOOKS_DARK_ELF =
 	{
-		1371,1391,1408
+		1371,
+		1391,
+		1408
 	};
 	private static final int[] BOOKS_ORC =
 	{
-		1518,1519,1520
+		1518,
+		1519,
+		1520
 	};
 	private static final int[] BOOKS_DWARF =
 	{
-		3038,3940,4915
+		3038,
+		3940,
+		4915
 	};
 	private static final int[] BOOKS_KAMAEL =
 	{
-		10025,10026,10027
+		10025,
+		10026,
+		10027
 	};
 	
 	/**
 	 * On First Talk Script
-	 * @param npc 
-	 * @param player 
-	 * @return 
+	 * @param npc
+	 * @param player
+	 * @return
 	 */
 	@Override
 	public final String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -88,17 +119,17 @@ public class SchoolDays extends Quest
 		}
 		return htmltext;
 	}
-
+	
 	/**
-	 * On Advanced Event Script 
+	 * On Advanced Event Script
 	 */
 	@Override
-	public final String onAdvEvent (String event, L2Npc npc, L2PcInstance player)
+	public final String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
-			st = newQuestState(player);	
+			st = newQuestState(player);
 		}
 		String htmltext = "";
 		
@@ -114,25 +145,25 @@ public class SchoolDays extends Quest
 		{
 			htmltext = "welcome.htm";
 		}
-       	return htmltext;
-	}	
-
+		return htmltext;
+	}
+	
 	/**
 	 * On Kill Monster Script
 	 */
 	@Override
-	public final String onKill(L2Npc npc,L2PcInstance player, boolean isPet)
+	public final String onKill(L2Npc npc, L2PcInstance player, boolean isPet)
 	{
 		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
-			st = newQuestState(player);	
+			st = newQuestState(player);
 		}
 		int npcId = npc.getNpcId();
 		if (FunEvents.SD_ACTIVE_DROP)
 		{
-			for(int ID : EventMonsters)
-			{ 
+			for (int ID : EventMonsters)
+			{
 				if (npcId == ID)
 				{
 					if (player.getRace() == Race.Human)
@@ -140,7 +171,7 @@ public class SchoolDays extends Quest
 						int random = Rnd.get(100);
 						if (random < 33)
 						{
-							st.giveItems(BOOKS_HUMAN[Rnd.get(BOOKS_HUMAN.length)],1);
+							st.giveItems(BOOKS_HUMAN[Rnd.get(BOOKS_HUMAN.length)], 1);
 						}
 					}
 					else if (player.getRace() == Race.Elf)
@@ -148,7 +179,7 @@ public class SchoolDays extends Quest
 						int random = Rnd.get(100);
 						if (random < 33)
 						{
-							st.giveItems(BOOKS_ELF[Rnd.get(BOOKS_ELF.length)],1);
+							st.giveItems(BOOKS_ELF[Rnd.get(BOOKS_ELF.length)], 1);
 						}
 					}
 					else if (player.getRace() == Race.DarkElf)
@@ -156,7 +187,7 @@ public class SchoolDays extends Quest
 						int random = Rnd.get(100);
 						if (random < 33)
 						{
-							st.giveItems(BOOKS_DARK_ELF[Rnd.get(BOOKS_DARK_ELF.length)],1);
+							st.giveItems(BOOKS_DARK_ELF[Rnd.get(BOOKS_DARK_ELF.length)], 1);
 						}
 					}
 					else if (player.getRace() == Race.Orc)
@@ -164,7 +195,7 @@ public class SchoolDays extends Quest
 						int random = Rnd.get(100);
 						if (random < 33)
 						{
-							st.giveItems(BOOKS_ORC[Rnd.get(BOOKS_ORC.length)],1);
+							st.giveItems(BOOKS_ORC[Rnd.get(BOOKS_ORC.length)], 1);
 						}
 					}
 					else if (player.getRace() == Race.Dwarf)
@@ -172,7 +203,7 @@ public class SchoolDays extends Quest
 						int random = Rnd.get(100);
 						if (random < 33)
 						{
-							st.giveItems(BOOKS_DWARF[Rnd.get(BOOKS_DWARF.length)],1);
+							st.giveItems(BOOKS_DWARF[Rnd.get(BOOKS_DWARF.length)], 1);
 						}
 					}
 					else if (player.getRace() == Race.Kamael)
@@ -180,31 +211,33 @@ public class SchoolDays extends Quest
 						int random = Rnd.get(100);
 						if (random < 33)
 						{
-							st.giveItems(BOOKS_KAMAEL[Rnd.get(BOOKS_KAMAEL.length)],1);
+							st.giveItems(BOOKS_KAMAEL[Rnd.get(BOOKS_KAMAEL.length)], 1);
 						}
 					}
 				}
-			}			
+			}
 		}
 		return super.onKill(npc, player, isPet);
-	}	
+	}
 	
 	public SchoolDays(int questId, String name, String descr)
 	{
-		super(questId, name, descr);		
+		super(questId, name, descr);
 		addStartNpc(SCHOOL_DAYS_NPC);
 		addFirstTalkId(SCHOOL_DAYS_NPC);
 		addTalkId(SCHOOL_DAYS_NPC);
-		for (int MONSTER: EventMonsters)
+		for (int MONSTER : EventMonsters)
 		{
 			addKillId(MONSTER);
-		}		
+		}
 	}
 	
 	public static void main(String[] args)
 	{
-		new SchoolDays(-1,qn,"events");
+		new SchoolDays(-1, SchoolDays.class.getSimpleName(), "events");
 		if (FunEvents.SD_STARTED)
+		{
 			_log.info("Event System: School Day Event loaded ...");
+		}
 	}
 }

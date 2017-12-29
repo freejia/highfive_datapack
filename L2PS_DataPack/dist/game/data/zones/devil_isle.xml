@@ -143,6 +143,7 @@
 		<node X="42813" Y="208983" />
 		<node X="41473" Y="207893" />
 	</zone>
+<!-- Zaken Rooms -->
 	<zone id='120111' name='t21_24_slave1f_001m1' type='ScriptZone' shape='NPoly' minZ='-3532' maxZ='-3332'>
 		<node X='53762' Y='217601' />
 		<node X='54718' Y='217594' />

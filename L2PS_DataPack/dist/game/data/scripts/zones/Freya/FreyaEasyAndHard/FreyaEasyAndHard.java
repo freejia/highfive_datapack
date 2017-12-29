@@ -25,8 +25,6 @@ import com.l2jserver.gameserver.datatables.NpcTable;
 import com.l2jserver.gameserver.datatables.SkillTable;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
-import com.l2jserver.gameserver.instancemanager.freya.FreyaManager;
-import com.l2jserver.gameserver.instancemanager.freya.FreyaManager.InstanceWorld;
 import com.l2jserver.gameserver.model.L2CharPosition;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2Party;
@@ -39,6 +37,7 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.templates.L2NpcTemplate;
 import com.l2jserver.gameserver.model.effects.L2EffectType;
 import com.l2jserver.gameserver.model.entity.Instance;
+import com.l2jserver.gameserver.model.instancezone.InstanceWorld;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
@@ -105,11 +104,11 @@ public class FreyaEasyAndHard extends Quest
 				{
 					case 1:
 						
-						_world._freya_controller = (L2Attackable) spawnNpc(freya_controller, 114707, -114793, -11199, 0, _world.instanceId);
+						_world._freya_controller = (L2Attackable) spawnNpc(freya_controller, 114707, -114793, -11199, 0, _world.getInstanceId());
 						_world._freya_controller.setIsInvul(true);
 						
-						spawnNpc(_sirra, 114766, -113141, -11200, 15956, _world.instanceId);
-						handleWorldState(1, _world.instanceId);
+						spawnNpc(_sirra, 114766, -113141, -11200, 15956, _world.getInstanceId());
+						handleWorldState(1, _world.getInstanceId());
 						break;
 					
 					case 3:
@@ -124,7 +123,7 @@ public class FreyaEasyAndHard extends Quest
 						if ((_world._archery_knights_hard.size() < 5) && (_world.status < 44))
 						{
 							int[] spawnXY = getRandomPoint(114385, 115042, -115106, -114466);
-							L2Npc mob = spawnNpc(archery_knight_hard, spawnXY[0], spawnXY[1], -11200, 20016, _world.instanceId);
+							L2Npc mob = spawnNpc(archery_knight_hard, spawnXY[0], spawnXY[1], -11200, 20016, _world.getInstanceId());
 							((L2Attackable) mob).setOnKillDelay(0);
 							L2PcInstance victim = getRandomPlayer(_world);
 							mob.setTarget(victim);
@@ -145,19 +144,19 @@ public class FreyaEasyAndHard extends Quest
 						if ((_world != null) && (_world._glaciers.size() < 5) && (_world.status < 44) && !Util.contains(glacier_blocked_status, _world.status))
 						{
 							int[] spawnXY = getRandomPoint(114385, 115042, -115106, -114466);
-							L2Npc mob = spawnNpc(glacier, spawnXY[0], spawnXY[1], -11200, 20016, _world.instanceId);
+							L2Npc mob = spawnNpc(glacier, spawnXY[0], spawnXY[1], -11200, 20016, _world.getInstanceId());
 							_world._glaciers.put(mob.getObjectId(), mob);
 						}
 						if (_world.status < 44)
 						{
-							ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, _world.instanceId), (Rnd.get(10, 40) * 1000) + 20000);
+							ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, _world.getInstanceId()), (Rnd.get(10, 40) * 1000) + 20000);
 						}
 						break;
 					
 					case 6:
 						for (int[] iter : _archeryKnightsSpawn)
 						{
-							L2Npc mob = spawnNpc(archery_knight_hard, iter[0], iter[1], iter[2], iter[3], _world.instanceId);
+							L2Npc mob = spawnNpc(archery_knight_hard, iter[0], iter[1], iter[2], iter[3], _world.getInstanceId());
 							((L2Attackable) mob).setOnKillDelay(0);
 							mob.setRunning();
 							L2PcInstance victim = getRandomPlayer(_world);
@@ -170,36 +169,36 @@ public class FreyaEasyAndHard extends Quest
 						break;
 					
 					case 7:
-						handleWorldState(2, _world.instanceId);
+						handleWorldState(2, _world.getInstanceId());
 						break;
 					case 8:
-						handleWorldState(11, _world.instanceId);
+						handleWorldState(11, _world.getInstanceId());
 						break;
 					case 9:
-						handleWorldState(19, _world.instanceId);
+						handleWorldState(19, _world.getInstanceId());
 						break;
 					case 10:
-						handleWorldState(20, _world.instanceId);
+						handleWorldState(20, _world.getInstanceId());
 						break;
 					case 11:
-						handleWorldState(25, _world.instanceId);
+						handleWorldState(25, _world.getInstanceId());
 						break;
 					case 12:
-						handleWorldState(30, _world.instanceId);
+						handleWorldState(30, _world.getInstanceId());
 						break;
 					case 13:
-						handleWorldState(31, _world.instanceId);
+						handleWorldState(31, _world.getInstanceId());
 						break;
 					case 14:
-						handleWorldState(41, _world.instanceId);
+						handleWorldState(41, _world.getInstanceId());
 						break;
 					case 15:
-						handleWorldState(43, _world.instanceId);
+						handleWorldState(43, _world.getInstanceId());
 						break;
 					case 16:
 						setInstanceRestriction(_world);
-						InstanceManager.getInstance().getInstance(_world.instanceId).setDuration(300000);
-						InstanceManager.getInstance().getInstance(_world.instanceId).setEmptyDestroyTime(0);
+						InstanceManager.getInstance().getInstance(_world.getInstanceId()).setDuration(300000);
+						InstanceManager.getInstance().getInstance(_world.getInstanceId()).setEmptyDestroyTime(0);
 						break;
 					case 19:
 						stopAll(_world);
@@ -215,10 +214,10 @@ public class FreyaEasyAndHard extends Quest
 				switch (_waveId)
 				{
 					case 1:
-						_world._freya_controller = (L2Attackable) spawnNpc(freya_controller, 114707, -114793, -11199, 0, _world.instanceId);
+						_world._freya_controller = (L2Attackable) spawnNpc(freya_controller, 114707, -114793, -11199, 0, _world.getInstanceId());
 						_world._freya_controller.setIsInvul(true);
-						spawnNpc(_sirra, 114766, -113141, -11200, 15956, _world.instanceId);
-						handleWorldState(1, _world.instanceId);
+						spawnNpc(_sirra, 114766, -113141, -11200, 15956, _world.getInstanceId());
+						handleWorldState(1, _world.getInstanceId());
 						break;
 					
 					case 3:
@@ -233,7 +232,7 @@ public class FreyaEasyAndHard extends Quest
 						if ((_world._archery_knights.size() < 5) && (_world.status < 44))
 						{
 							int[] spawnXY = getRandomPoint(114385, 115042, -115106, -114466);
-							L2Npc mob = spawnNpc(archery_knight, spawnXY[0], spawnXY[1], -11200, 20016, _world.instanceId);
+							L2Npc mob = spawnNpc(archery_knight, spawnXY[0], spawnXY[1], -11200, 20016, _world.getInstanceId());
 							((L2Attackable) mob).setOnKillDelay(0);
 							L2PcInstance victim = getRandomPlayer(_world);
 							mob.setTarget(victim);
@@ -254,19 +253,19 @@ public class FreyaEasyAndHard extends Quest
 						if ((_world != null) && (_world._glaciers.size() < 5) && (_world.status < 44) && !Util.contains(glacier_blocked_status, _world.status))
 						{
 							int[] spawnXY = getRandomPoint(114385, 115042, -115106, -114466);
-							L2Npc mob = spawnNpc(glacier, spawnXY[0], spawnXY[1], -11200, 20016, _world.instanceId);
+							L2Npc mob = spawnNpc(glacier, spawnXY[0], spawnXY[1], -11200, 20016, _world.getInstanceId());
 							_world._glaciers.put(mob.getObjectId(), mob);
 						}
 						if (_world.status < 44)
 						{
-							ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, _world.instanceId), (Rnd.get(10, 40) * 1000) + 20000);
+							ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, _world.getInstanceId()), (Rnd.get(10, 40) * 1000) + 20000);
 						}
 						break;
 					
 					case 6:
 						for (int[] iter : _archeryKnightsSpawn)
 						{
-							L2Npc mob = spawnNpc(archery_knight, iter[0], iter[1], iter[2], iter[3], _world.instanceId);
+							L2Npc mob = spawnNpc(archery_knight, iter[0], iter[1], iter[2], iter[3], _world.getInstanceId());
 							((L2Attackable) mob).setOnKillDelay(0);
 							mob.setRunning();
 							L2PcInstance victim = getRandomPlayer(_world);
@@ -279,42 +278,42 @@ public class FreyaEasyAndHard extends Quest
 						break;
 					
 					case 7:
-						handleWorldState(2, _world.instanceId);
+						handleWorldState(2, _world.getInstanceId());
 						break;
 					case 8:
-						handleWorldState(11, _world.instanceId);
+						handleWorldState(11, _world.getInstanceId());
 						break;
 					case 9:
-						handleWorldState(19, _world.instanceId);
+						handleWorldState(19, _world.getInstanceId());
 						break;
 					case 10:
-						handleWorldState(20, _world.instanceId);
+						handleWorldState(20, _world.getInstanceId());
 						break;
 					case 11:
-						handleWorldState(25, _world.instanceId);
+						handleWorldState(25, _world.getInstanceId());
 						break;
 					case 12:
-						handleWorldState(30, _world.instanceId);
+						handleWorldState(30, _world.getInstanceId());
 						break;
 					case 13:
-						handleWorldState(31, _world.instanceId);
+						handleWorldState(31, _world.getInstanceId());
 						break;
 					case 14:
-						handleWorldState(41, _world.instanceId);
+						handleWorldState(41, _world.getInstanceId());
 						break;
 					case 15:
-						handleWorldState(43, _world.instanceId);
+						handleWorldState(43, _world.getInstanceId());
 						break;
 					case 16:
-						handleWorldState(45, _world.instanceId);
+						handleWorldState(45, _world.getInstanceId());
 						break;
 					case 17:
-						handleWorldState(46, _world.instanceId);
+						handleWorldState(46, _world.getInstanceId());
 						break;
 					case 18:
 						setInstanceRestriction(_world);
-						InstanceManager.getInstance().getInstance(_world.instanceId).setDuration(300000);
-						InstanceManager.getInstance().getInstance(_world.instanceId).setEmptyDestroyTime(0);
+						InstanceManager.getInstance().getInstance(_world.getInstanceId()).setDuration(300000);
+						InstanceManager.getInstance().getInstance(_world.getInstanceId()).setEmptyDestroyTime(0);
 						break;
 					case 19:
 						stopAll(_world);
@@ -514,7 +513,7 @@ public class FreyaEasyAndHard extends Quest
 		
 		stopAll(world);
 		
-		for (int objId : world.allowed)
+		for (int objId : world.getAllowed())
 		{
 			L2PcInstance player = L2World.getInstance().getPlayer(objId);
 			player.showQuestMovie(movieId);
@@ -582,28 +581,28 @@ public class FreyaEasyAndHard extends Quest
 		
 		if (movieId != 15)
 		{
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(20, world.instanceId), pause);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(20, world.getInstanceId()), pause);
 		}
 		if (movieId == 19)
 		{
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 100);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 200);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 500);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 1000);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 2000);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 3000);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 4000);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 5000);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 6000);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 7000);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 8000);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.instanceId), 9000);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 100);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 200);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 500);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 1000);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 2000);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 3000);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 4000);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 5000);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 6000);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 7000);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 8000);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(19, world.getInstanceId()), 9000);
 		}
 	}
 	
 	protected void broadcastTimer(FreyaWorld world)
 	{
-		for (int objId : world.allowed)
+		for (int objId : world.getAllowed())
 		{
 			L2PcInstance plr = L2World.getInstance().getPlayer(objId);
 			ExFreyaSendUIEvent time_packet = new ExFreyaSendUIEvent(plr, false, false, 60, 0, "Time for prepare to next stage!");
@@ -626,7 +625,7 @@ public class FreyaEasyAndHard extends Quest
 	
 	protected void handleWorldState(int statusId, FreyaWorld world)
 	{
-		int instanceId = world.instanceId;
+		int instanceId = world.getInstanceId();
 		if (_isHard)
 		{
 			switch (statusId)
@@ -637,12 +636,12 @@ public class FreyaEasyAndHard extends Quest
 					if (!debug)
 					{
 						broadcastMovie(15, world);
-						InstanceManager.getInstance().getInstance(world.instanceId).getDoor(door).openMe();
-						ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(7, world.instanceId), 52500);
+						InstanceManager.getInstance().getInstance(world.getInstanceId()).getDoor(door).openMe();
+						ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(7, world.getInstanceId()), 52500);
 					}
 					else
 					{
-						ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(7, world.instanceId), 1000);
+						ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(7, world.getInstanceId()), 1000);
 					}
 					break;
 				case 2:
@@ -652,7 +651,7 @@ public class FreyaEasyAndHard extends Quest
 					world._freyaThrone.setOnKillDelay(0);
 					world._freyaThrone.setIsInvul(true);
 					world._freyaThrone.setIsImmobilized(true);
-					for (int objId : world.allowed)
+					for (int objId : world.getAllowed())
 					{
 						L2PcInstance player = L2World.getInstance().getPlayer(objId);
 						if ((player != null) && player.isOnline())
@@ -676,7 +675,7 @@ public class FreyaEasyAndHard extends Quest
 						world._archery_knights_hard.put(mob.getObjectId(), mob);
 					}
 					
-					for (int objId : world.allowed)
+					for (int objId : world.getAllowed())
 					{
 						L2PcInstance player = L2World.getInstance().getPlayer(objId);
 						player.setIsImmobilized(false);
@@ -687,8 +686,8 @@ public class FreyaEasyAndHard extends Quest
 					
 					break;
 				case 10:
-					broadcastString(1801086, world.instanceId);
-					InstanceManager.getInstance().getInstance(world.instanceId).getDoor(door).closeMe();
+					broadcastString(1801086, world.getInstanceId());
+					InstanceManager.getInstance().getInstance(world.getInstanceId()).getDoor(door).closeMe();
 					world._freyaThrone.setIsInvul(false);
 					world._freyaThrone.setIsImmobilized(false);
 					world._freyaThrone.getAI();
@@ -701,7 +700,7 @@ public class FreyaEasyAndHard extends Quest
 						world._glaciers.put(mob.getObjectId(), mob);
 					}
 					
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.instanceId), 7000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.getInstanceId()), 7000);
 					
 					for (L2Npc mob : world._archery_knights_hard.values())
 					{
@@ -717,15 +716,15 @@ public class FreyaEasyAndHard extends Quest
 					world._archery_knights_hard.clear();
 					world._freyaThrone.deleteMe();
 					world._freyaThrone = null;
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(9, world.instanceId), 22000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(9, world.getInstanceId()), 22000);
 					break;
 				case 12:
 					break;
 				case 19:
-					world._freyaSpelling = spawnNpc(freyaSpelling, 114723, -117502, -10672, 15956, world.instanceId);
+					world._freyaSpelling = spawnNpc(freyaSpelling, 114723, -117502, -10672, 15956, world.getInstanceId());
 					world._freyaSpelling.setIsImmobilized(true);
 					broadcastTimer(world);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(10, world.instanceId), 60000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(10, world.getInstanceId()), 60000);
 					break;
 				case 20:
 					for (int[] iter : _archeryKnightsSpawn)
@@ -749,23 +748,23 @@ public class FreyaEasyAndHard extends Quest
 						L2Npc mob = spawnNpc(glacier, spawnXY[0], spawnXY[1], -11200, 0, instanceId);
 						world._glaciers.put(mob.getObjectId(), mob);
 					}
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.instanceId), 7000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.getInstanceId()), 7000);
 					break;
 				case 22:
 				case 23:
 					break;
 				case 24:
 					broadcastMovie(23, world);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(11, world.instanceId), 7000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(11, world.getInstanceId()), 7000);
 					break;
 				case 25:
 					world._glakias_hard = (L2Attackable) spawnNpc(Glakias_hard, 114707, -114799, -11199, 15956, instanceId);
 					world._glakias_hard.setOnKillDelay(0);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.instanceId), 7000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.getInstanceId()), 7000);
 					break;
 				case 29:
 					broadcastTimer(world);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(12, world.instanceId), 60000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(12, world.getInstanceId()), 60000);
 					break;
 				case 30:
 					for (int[] iter : _archeryKnightsSpawn)
@@ -777,26 +776,26 @@ public class FreyaEasyAndHard extends Quest
 					world._freyaSpelling.deleteMe();
 					world._freyaSpelling = null;
 					broadcastMovie(17, world);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(13, world.instanceId), 21500);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(13, world.getInstanceId()), 21500);
 					break;
 				case 31:
 					if (!debug)
 					{
 						Okoli as = new Okoli(decoration, 2);
-						Scenkos.toPlayersInInstance(as, world.instanceId);
+						Scenkos.toPlayersInInstance(as, world.getInstanceId());
 						for (int emitter : emmiters)
 						{
 							OnEventTrigger et = new OnEventTrigger(emitter, false);
-							Scenkos.toPlayersInInstance(et, world.instanceId);
+							Scenkos.toPlayersInInstance(et, world.getInstanceId());
 						}
 					}
 					
 					broadcastString(1801088, instanceId);
-					world._freyaStand_hard = (L2Attackable) spawnNpc(freyaStand_hard, 114720, -117085, -11088, 15956, world.instanceId);
+					world._freyaStand_hard = (L2Attackable) spawnNpc(freyaStand_hard, 114720, -117085, -11088, 15956, world.getInstanceId());
 					world._freyaStand_hard.setOnKillDelay(0);
 					world._freyaStand_hard.getAI();
 					world._freyaStand_hard.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, new L2CharPosition(114722, -114798, -11205, 15956));
-					for (int objId : world.allowed)
+					for (int objId : world.getAllowed())
 					{
 						L2PcInstance player = L2World.getInstance().getPlayer(objId);
 						if ((player != null) && player.isOnline())
@@ -809,7 +808,7 @@ public class FreyaEasyAndHard extends Quest
 					broadcastMovie(18, world);
 					world._freyaStand_hard.setIsImmobilized(true);
 					stopAll(world);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(14, world.instanceId), 27000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(14, world.getInstanceId()), 27000);
 					break;
 				case 41:
 					for (L2Npc mob : world._archery_knights_hard.values())
@@ -842,7 +841,7 @@ public class FreyaEasyAndHard extends Quest
 					}
 					L2Skill skill1 = SkillTable.getInstance().getInfo(6288, 1);
 					L2Skill skill2 = SkillTable.getInstance().getInfo(6289, 1);
-					for (int objId : world.allowed)
+					for (int objId : world.getAllowed())
 					{
 						L2PcInstance player = L2World.getInstance().getPlayer(objId);
 						if (player != null)
@@ -883,12 +882,12 @@ public class FreyaEasyAndHard extends Quest
 					if (!debug)
 					{
 						broadcastMovie(15, world);
-						InstanceManager.getInstance().getInstance(world.instanceId).getDoor(door).openMe();
-						ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(7, world.instanceId), 52500);
+						InstanceManager.getInstance().getInstance(world.getInstanceId()).getDoor(door).openMe();
+						ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(7, world.getInstanceId()), 52500);
 					}
 					else
 					{
-						ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(7, world.instanceId), 1000);
+						ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(7, world.getInstanceId()), 1000);
 					}
 					break;
 				case 2:
@@ -898,7 +897,7 @@ public class FreyaEasyAndHard extends Quest
 					world._freyaThrone.setOnKillDelay(0);
 					world._freyaThrone.setIsInvul(true);
 					world._freyaThrone.setIsImmobilized(true);
-					for (int objId : world.allowed)
+					for (int objId : world.getAllowed())
 					{
 						L2PcInstance player = L2World.getInstance().getPlayer(objId);
 						if ((player != null) && player.isOnline())
@@ -922,7 +921,7 @@ public class FreyaEasyAndHard extends Quest
 						world._archery_knights.put(mob.getObjectId(), mob);
 					}
 					
-					for (int objId : world.allowed)
+					for (int objId : world.getAllowed())
 					{
 						L2PcInstance player = L2World.getInstance().getPlayer(objId);
 						player.setIsImmobilized(false);
@@ -933,8 +932,8 @@ public class FreyaEasyAndHard extends Quest
 					
 					break;
 				case 10:
-					broadcastString(1801086, world.instanceId);
-					InstanceManager.getInstance().getInstance(world.instanceId).getDoor(door).closeMe();
+					broadcastString(1801086, world.getInstanceId());
+					InstanceManager.getInstance().getInstance(world.getInstanceId()).getDoor(door).closeMe();
 					world._freyaThrone.setIsInvul(false);
 					world._freyaThrone.setIsImmobilized(false);
 					world._freyaThrone.getAI();
@@ -947,7 +946,7 @@ public class FreyaEasyAndHard extends Quest
 						world._glaciers.put(mob.getObjectId(), mob);
 					}
 					
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.instanceId), 7000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.getInstanceId()), 7000);
 					
 					for (L2Npc mob : world._archery_knights.values())
 					{
@@ -963,15 +962,15 @@ public class FreyaEasyAndHard extends Quest
 					world._archery_knights.clear();
 					world._freyaThrone.deleteMe();
 					world._freyaThrone = null;
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(9, world.instanceId), 22000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(9, world.getInstanceId()), 22000);
 					break;
 				case 12:
 					break;
 				case 19:
-					world._freyaSpelling = spawnNpc(freyaSpelling, 114723, -117502, -10672, 15956, world.instanceId);
+					world._freyaSpelling = spawnNpc(freyaSpelling, 114723, -117502, -10672, 15956, world.getInstanceId());
 					world._freyaSpelling.setIsImmobilized(true);
 					broadcastTimer(world);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(10, world.instanceId), 60000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(10, world.getInstanceId()), 60000);
 					break;
 				case 20:
 					for (int[] iter : _archeryKnightsSpawn)
@@ -995,23 +994,23 @@ public class FreyaEasyAndHard extends Quest
 						L2Npc mob = spawnNpc(glacier, spawnXY[0], spawnXY[1], -11200, 0, instanceId);
 						world._glaciers.put(mob.getObjectId(), mob);
 					}
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.instanceId), 7000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.getInstanceId()), 7000);
 					break;
 				case 22:
 				case 23:
 					break;
 				case 24:
 					broadcastMovie(23, world);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(11, world.instanceId), 7000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(11, world.getInstanceId()), 7000);
 					break;
 				case 25:
 					world._glakias = (L2Attackable) spawnNpc(Glakias, 114707, -114799, -11199, 15956, instanceId);
 					world._glakias.setOnKillDelay(0);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.instanceId), 7000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(5, world.getInstanceId()), 7000);
 					break;
 				case 29:
 					broadcastTimer(world);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(12, world.instanceId), 60000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(12, world.getInstanceId()), 60000);
 					break;
 				case 30:
 					for (int[] iter : _archeryKnightsSpawn)
@@ -1023,25 +1022,25 @@ public class FreyaEasyAndHard extends Quest
 					world._freyaSpelling.deleteMe();
 					world._freyaSpelling = null;
 					broadcastMovie(17, world);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(13, world.instanceId), 21500);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(13, world.getInstanceId()), 21500);
 					break;
 				case 31:
 					if (!debug)
 					{
 						Okoli as = new Okoli(decoration, 2);
-						Scenkos.toPlayersInInstance(as, world.instanceId);
+						Scenkos.toPlayersInInstance(as, world.getInstanceId());
 						for (int emitter : emmiters)
 						{
 							OnEventTrigger et = new OnEventTrigger(emitter, false);
-							Scenkos.toPlayersInInstance(et, world.instanceId);
+							Scenkos.toPlayersInInstance(et, world.getInstanceId());
 						}
 					}
 					
-					world._freyaStand = (L2Attackable) spawnNpc(freyaStand, 114720, -117085, -11088, 15956, world.instanceId);
+					world._freyaStand = (L2Attackable) spawnNpc(freyaStand, 114720, -117085, -11088, 15956, world.getInstanceId());
 					world._freyaStand.setOnKillDelay(0);
 					world._freyaStand.getAI();
 					world._freyaStand.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, new L2CharPosition(114722, -114798, -11205, 15956));
-					for (int objId : world.allowed)
+					for (int objId : world.getAllowed())
 					{
 						L2PcInstance player = L2World.getInstance().getPlayer(objId);
 						if ((player != null) && player.isOnline())
@@ -1054,7 +1053,7 @@ public class FreyaEasyAndHard extends Quest
 					broadcastMovie(18, world);
 					world._freyaStand.setIsImmobilized(true);
 					stopAll(world);
-					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(14, world.instanceId), 27000);
+					ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(14, world.getInstanceId()), 27000);
 					break;
 				case 41:
 					for (L2Npc mob : world._archery_knights.values())
@@ -1087,7 +1086,7 @@ public class FreyaEasyAndHard extends Quest
 					}
 					L2Skill skill1 = SkillTable.getInstance().getInfo(6288, 1);
 					L2Skill skill2 = SkillTable.getInstance().getInfo(6289, 1);
-					for (int objId : world.allowed)
+					for (int objId : world.getAllowed())
 					{
 						L2PcInstance player = L2World.getInstance().getPlayer(objId);
 						if (player != null)
@@ -1118,7 +1117,7 @@ public class FreyaEasyAndHard extends Quest
 							InstanceManager.getInstance().getInstance(instanceId).getNpcs().remove(mob);
 						}
 					}
-					for (int objId : world.allowed)
+					for (int objId : world.getAllowed())
 					{
 						L2PcInstance player = L2World.getInstance().getPlayer(objId);
 						QuestState st = player.getQuestState("Q10286_ReunionWithSirra");
@@ -1143,7 +1142,7 @@ public class FreyaEasyAndHard extends Quest
 		boolean exists = false;
 		while (!exists)
 		{
-			L2PcInstance player = L2World.getInstance().getPlayer(world.allowed.get(Rnd.get(0, world.allowed.size() - 1)));
+			L2PcInstance player = L2World.getInstance().getPlayer(world.getAllowed().get(getRandom(world.getAllowed().size())));
 			if (player != null)
 			{
 				exists = true;
@@ -1155,7 +1154,7 @@ public class FreyaEasyAndHard extends Quest
 	
 	protected FreyaWorld getWorld(int instanceId)
 	{
-		InstanceWorld tmpworld = FreyaManager.getInstance().getWorld(instanceId);
+		InstanceWorld tmpworld = InstanceManager.getInstance().getWorld(instanceId);
 		FreyaWorld world = null;
 		if (tmpworld instanceof FreyaWorld)
 		{
@@ -1176,7 +1175,7 @@ public class FreyaEasyAndHard extends Quest
 	
 	private FreyaWorld getWorld(L2PcInstance player)
 	{
-		InstanceWorld tmpworld = FreyaManager.getInstance().getPlayerWorld(player);
+		InstanceWorld tmpworld = InstanceManager.getInstance().getPlayerWorld(player);
 		FreyaWorld world = null;
 		if (tmpworld instanceof FreyaWorld)
 		{
@@ -1394,8 +1393,8 @@ public class FreyaEasyAndHard extends Quest
 		{
 			world._freya_controller.deleteMe();
 			world._freya_controller = null;
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(2, world.instanceId), 100);
-			handleWorldState(31, world.instanceId);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(2, world.getInstanceId()), 100);
+			handleWorldState(31, world.getInstanceId());
 		}
 		return super.onAggroRangeEnter(npc, player, isPet);
 	}
@@ -1415,7 +1414,7 @@ public class FreyaEasyAndHard extends Quest
 	{
 		_log.info("starter=" + player.getName());
 		int instanceId = 0;
-		InstanceWorld world = FreyaManager.getInstance().getPlayerWorld(player);
+		InstanceWorld world = InstanceManager.getInstance().getPlayerWorld(player);
 		if (world != null)
 		{
 			if (!(world instanceof FreyaWorld))
@@ -1434,11 +1433,11 @@ public class FreyaEasyAndHard extends Quest
 		instanceId = InstanceManager.getInstance().createDynamicInstance(template);
 		world = new FreyaWorld();
 		
-		world.instanceId = instanceId;
-		world.templateId = INSTANCE_ID;
+		world.setInstanceId(instanceId);
+		world.setTemplateId(INSTANCE_ID);
 		world.status = 0;
 		
-		FreyaManager.getInstance().addWorld(world);
+		InstanceManager.getInstance().addWorld(world);
 		_log.info("Freya started " + template + " Instance: " + instanceId + " created by player: " + player.getName());
 		
 		if ((debug) || (player.isGM()))
@@ -1452,9 +1451,9 @@ public class FreyaEasyAndHard extends Quest
 					qs.playSound("ItemSound.quest_middle");
 				}
 			}
-			world.allowed.add(player.getObjectId());
+			world.addAllowed(player.getObjectId());
 			teleportPlayer(player, (FreyaWorld) world);
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(1, world.instanceId), 100);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(1, world.getInstanceId()), 100);
 			return;
 		}
 		
@@ -1471,11 +1470,11 @@ public class FreyaEasyAndHard extends Quest
 						qs.playSound("ItemSound.quest_middle");
 					}
 				}
-				world.allowed.add(plr.getObjectId());
+				world.addAllowed(plr.getObjectId());
 				teleportPlayer(plr, (FreyaWorld) world);
 			}
 			
-			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(1, world.instanceId), 100);
+			ThreadPoolManager.getInstance().scheduleGeneral(new spawnWave(1, world.getInstanceId()), 100);
 			return;
 		}
 	}
@@ -1575,7 +1574,7 @@ public class FreyaEasyAndHard extends Quest
 			}
 			if (_isHard)
 			{
-				QuestState st = partyMember.getQuestState("Q10286_ReunionWithSirra");
+				QuestState st = player.getParty().getCommandChannel().getLeader().getQuestState("Q10286_ReunionWithSirra");
 				if (!st.isCompleted())
 				{
 					SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.C1_QUEST_REQUIREMENT_NOT_SUFFICIENT);
@@ -1586,7 +1585,7 @@ public class FreyaEasyAndHard extends Quest
 			}
 			if (_isEasy)
 			{
-				QuestState st = partyMember.getQuestState("Q10286_ReunionWithSirra");
+				QuestState st = player.getParty().getCommandChannel().getLeader().getQuestState("Q10286_ReunionWithSirra");
 				if ((st == null))
 				{
 					SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.C1_QUEST_REQUIREMENT_NOT_SUFFICIENT);
@@ -1604,12 +1603,12 @@ public class FreyaEasyAndHard extends Quest
 	private void teleportPlayer(L2PcInstance player, FreyaWorld world)
 	{
 		player.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-		player.setInstanceId(world.instanceId);
+		player.setInstanceId(world.getInstanceId());
 		player.teleToLocation(113991, -112297, -11200);
 		if (player.getSummon() != null)
 		{
 			player.getSummon().getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-			player.getSummon().setInstanceId(world.instanceId);
+			player.getSummon().setInstanceId(world.getInstanceId());
 			player.getSummon().teleToLocation(113991, -112297, -11200);
 		}
 		return;
@@ -1641,7 +1640,7 @@ public class FreyaEasyAndHard extends Quest
 		
 		SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.INSTANT_ZONE_S1_RESTRICTED);
 		sm.addString(InstanceManager.getInstance().getInstanceIdName(INSTANCE_ID));
-		for (int objectId : world.allowed)
+		for (int objectId : world.getAllowed())
 		{
 			L2PcInstance player = L2World.getInstance().getPlayer(objectId);
 			InstanceManager.getInstance().setInstanceTime(objectId, INSTANCE_ID, reenter.getTimeInMillis());
@@ -1787,7 +1786,7 @@ public class FreyaEasyAndHard extends Quest
 			}
 		}
 		
-		for (L2Npc mob : InstanceManager.getInstance().getInstance(world.instanceId).getNpcs())
+		for (L2Npc mob : InstanceManager.getInstance().getInstance(world.getInstanceId()).getNpcs())
 		{
 			if ((mob != null) && !mob.isDead())
 			{
@@ -1802,7 +1801,7 @@ public class FreyaEasyAndHard extends Quest
 			}
 		}
 		
-		for (int objId : world.allowed)
+		for (int objId : world.getAllowed())
 		{
 			L2PcInstance player = L2World.getInstance().getPlayer(objId);
 			player.abortAttack();
@@ -1820,7 +1819,7 @@ public class FreyaEasyAndHard extends Quest
 			return;
 		}
 		
-		for (L2Npc mob : InstanceManager.getInstance().getInstance(world.instanceId).getNpcs())
+		for (L2Npc mob : InstanceManager.getInstance().getInstance(world.getInstanceId()).getNpcs())
 		{
 			L2Object target = null;
 			
@@ -1842,7 +1841,7 @@ public class FreyaEasyAndHard extends Quest
 			}
 		}
 		
-		for (int objId : world.allowed)
+		for (int objId : world.getAllowed())
 		{
 			L2PcInstance player = L2World.getInstance().getPlayer(objId);
 			player.setIsImmobilized(false);

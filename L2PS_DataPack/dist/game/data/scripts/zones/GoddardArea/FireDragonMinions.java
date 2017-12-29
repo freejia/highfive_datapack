@@ -62,6 +62,20 @@ public class FireDragonMinions extends AbstractNpcAI
 		addSpawn(PUSTBON, 210882, -114370, -1636, 0, false, 0, false, npc.getInstanceId());
 	}
 	
+	private void SpawnMobNextWave(L2Npc npc)
+	{
+		addSpawn(PUSTBON, 213936, -115571, -1636, 0, false, 0, false, npc.getInstanceId());
+		addSpawn(PUSTBON, 213469, -115830, -1639, 0, false, 0, false, npc.getInstanceId());
+		addSpawn(PUSTBON, 212840, -115864, -1636, 0, false, 0, false, npc.getInstanceId());
+		addSpawn(PUSTBON, 212205, -115731, -1636, 0, false, 0, false, npc.getInstanceId());
+		addSpawn(PUSTBON, 211874, -115263, -1636, 0, false, 0, false, npc.getInstanceId());
+		addSpawn(PUSTBON, 211619, -114632, -1636, 0, false, 0, false, npc.getInstanceId());
+		addSpawn(PUSTBON, 211815, -114040, -1636, 0, false, 0, false, npc.getInstanceId());
+		addSpawn(PUSTBON, 212429, -113706, -1636, 0, false, 0, false, npc.getInstanceId());
+		addSpawn(PUSTBON, 213011, -113488, -1636, 0, false, 0, false, npc.getInstanceId());
+		addSpawn(PUSTBON, 212892, -114237, -1636, 0, false, 0, false, npc.getInstanceId());
+	}
+	
 	@Override
 	public String onAttack(L2Npc npc, L2PcInstance attacker, int damage, boolean isPet)
 	{
@@ -84,7 +98,7 @@ public class FireDragonMinions extends AbstractNpcAI
 					if (nowHp < (maxHp * 0.6))
 					{
 						FireDragonStatus = 2;
-						SpawnMobs(npc);
+						SpawnMobNextWave(npc);
 					}
 					break;
 				case 2:
@@ -98,7 +112,7 @@ public class FireDragonMinions extends AbstractNpcAI
 					if (nowHp < (maxHp * 0.3))
 					{
 						FireDragonStatus = 4;
-						SpawnMobs(npc);
+						SpawnMobNextWave(npc);
 					}
 					break;
 				case 4:
@@ -112,7 +126,7 @@ public class FireDragonMinions extends AbstractNpcAI
 					if (nowHp < (maxHp * 0.1))
 					{
 						FireDragonStatus = 6;
-						SpawnMobs(npc);
+						SpawnMobNextWave(npc);
 					}
 					break;
 				case 6:

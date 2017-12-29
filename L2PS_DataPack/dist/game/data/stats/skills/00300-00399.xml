@@ -1248,6 +1248,7 @@
 		<set name="skillType" val="CPDAMPERCENT" />
 		<set name="targetType" val="ONE" />
 		<set name="trait" val="DEATH" />
+		<set name="pvp" val="true" />
 		<enchant1 name="hpConsume" val="#ench1hpConsume" />
 		<enchant1 name="magicLvl" val="#enchMagicLvl" />
 		<enchant2 name="magicLvl" val="#enchMagicLvl" />
@@ -1698,6 +1699,7 @@
 		<set name="skillType" val="PDAM" />
 		<set name="SSBoost" val="2.0" />
 		<set name="targetType" val="ONE" />
+		<set name="pvp" val="true" />
 		<enchant1 name="magicLvl" val="#enchMagicLvl" />
 		<enchant1 name="power" val="#ench1Power" />
 		<enchant2 name="magicLvl" val="#enchMagicLvl" />
@@ -1937,8 +1939,8 @@
 			<using kind="Dagger,Dual Dagger" />
 		</cond>
 		<for>
-			<effect name="Stun" abnormalTime="9" val="0" effectPower="40" abnormalLvl="1" abnormalType="stun" />
 			<effect name="Bluff" noicon="1" val="0" effectPower="80" />
+			<effect name="Stun" abnormalTime="9" val="0" effectPower="40" abnormalLvl="1" abnormalType="stun" />
 			<effect name="RemoveTarget" noicon="1" val="0" effectPower="80" />
 		</for>
 		<enchant1for>
@@ -2064,6 +2066,7 @@
 		<set name="SSBoost" val="2.0" />
 		<set name="targetType" val="AREA" />
 		<set name="trait" val="SHOCK" />
+		<set name="pvp" val="true" />
 		<enchant1 name="magicLvl" val="#enchMagicLvl" />
 		<enchant1 name="power" val="#ench1Power" />
 		<enchant2 name="hpConsume" val="#ench2hpConsume" />
@@ -2119,6 +2122,7 @@
 		<set name="SSBoost" val="2.0" />
 		<set name="targetType" val="ONE" />
 		<set name="trait" val="SHOCK" />
+		<set name="pvp" val="true" />
 		<enchant1 name="magicLvl" val="#enchMagicLvl" />
 		<enchant1 name="power" val="#ench1Power" />
 		<enchant2 name="hpConsume" val="#ench2hpConsume" />

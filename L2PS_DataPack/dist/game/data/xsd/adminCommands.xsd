@@ -16,6 +16,10 @@
 						<xs:attribute name="command" use="required">
 							<xs:simpleType>
 								<xs:restriction base="xs:token">
+									<xs:enumeration value="admin_premium_menu" />
+									<xs:enumeration value="admin_premium_add1" />
+									<xs:enumeration value="admin_premium_add2" />
+									<xs:enumeration value="admin_premium_add3" />
 									<xs:enumeration value="admin_townwar_start" />
 									<xs:enumeration value="admin_townwar_end" />
 									<xs:enumeration value="admin_abnormal_menu" />

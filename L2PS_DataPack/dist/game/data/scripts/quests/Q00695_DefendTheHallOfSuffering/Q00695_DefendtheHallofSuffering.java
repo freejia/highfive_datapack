@@ -32,13 +32,13 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 /**
  * @Author: RobikBobik L2PS Team
  */
-public final class Q00695_DefendtheHallofSuffering extends Quest
+public final class Q00695_DefendTheHallOfSuffering extends Quest
 {
 	private static final int TEPIOS = 32603;
 	private static final int TEPIOS2 = 32530;
 	private static final int SOE = 736;
 	
-	public Q00695_DefendtheHallofSuffering(int questId, String name, String descr)
+	public Q00695_DefendTheHallOfSuffering(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
 		
@@ -274,6 +274,6 @@ public final class Q00695_DefendtheHallofSuffering extends Quest
 	
 	public static void main(String[] args)
 	{
-		new Q00695_DefendtheHallofSuffering(695, Q00695_DefendtheHallofSuffering.class.getSimpleName(), "Defend The Hall of Suffering");
+		new Q00695_DefendTheHallOfSuffering(695, Q00695_DefendTheHallOfSuffering.class.getSimpleName(), "Defend The Hall of Suffering");
 	}
 }

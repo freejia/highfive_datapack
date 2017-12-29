@@ -709,7 +709,7 @@ public class FinalEmperialTomb extends Quest
 						{
 							openDoor(doorId, world.getInstanceId());
 						}
-						ThreadPoolManager.getInstance().scheduleGeneral(new IntroTask(world, 0), 600000);
+						ThreadPoolManager.getInstance().scheduleGeneral(new IntroTask(world, 0), 240000);
 						break;
 					case 3: // first morph
 						if (world.songEffectTask != null)

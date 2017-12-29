@@ -27,8 +27,7 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
 /**
- * @Fixed by L2Ps Team
- * www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class MasterOfEnchanting extends Quest
 {
@@ -45,15 +44,21 @@ public class MasterOfEnchanting extends Quest
 	
 	private static final int[] _hat_shadow_reward =
 	{
-		13074, 13075, 13076
+		13074,
+		13075,
+		13076
 	};
 	private static final int[] _hat_event_reward =
 	{
-		13518, 13519, 13522
+		13518,
+		13519,
+		13522
 	};
 	private static final int[] _crystal_reward =
 	{
-		13071, 13072, 13073
+		13071,
+		13072,
+		13073
 	};
 	
 	@SuppressWarnings("deprecation")
@@ -319,6 +324,6 @@ public class MasterOfEnchanting extends Quest
 	
 	public static void main(String[] args)
 	{
-		new MasterOfEnchanting(-1, "MasterOfEnchanting", "events");
+		new MasterOfEnchanting(-1, MasterOfEnchanting.class.getSimpleName(), "events");
 	}
 }

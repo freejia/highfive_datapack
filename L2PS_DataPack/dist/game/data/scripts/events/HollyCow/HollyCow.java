@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package events.HollyCow; 
+package events.HollyCow;
 
 import com.l2jserver.FunEvents;
 import com.l2jserver.gameserver.ai.CtrlIntention;
@@ -26,31 +26,28 @@ import com.l2jserver.gameserver.model.quest.jython.QuestJython;
 import com.l2jserver.util.Rnd;
 
 /**
- * @Fixed by L2Ps Team
- * www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class HollyCow extends QuestJython
 {
-	private static final String		QN								= "HollyCow";
-	private static final int		FARMER							= 13183;
-
-	private static final int		MILK_COW						= 13187;
-	private static final int		HEAD_MILK_COW					= 13188;
-	private static final int		GLOOM_MILK_COW					= 13191;
-	private static final int		GLOOM_HEAD_MILK_COW				= 13192;
-	private static final int		HC_ADENA						= 57;
-	private static final int		HC_MILK							= 14739;
-	private static final int		HC_MILK_COW_SCROLL				= 14724;
-	private static final int		HC_HEAD_MILK_COW_SCROLL			= 14725;
-	private static final int		HC_GLOOM_MILK_COW_SCROLL		= 14725;
-	private static final int		HC_GLOOM_HEAD_MILK_COW_SCROLL	= 14725;
-	private static final int		BULK							= 13189;
-	private static final int		HEAD_BULK						= 13190;
-
+	private static final int FARMER = 13183;
+	private static final int MILK_COW = 13187;
+	private static final int HEAD_MILK_COW = 13188;
+	private static final int GLOOM_MILK_COW = 13191;
+	private static final int GLOOM_HEAD_MILK_COW = 13192;
+	private static final int HC_ADENA = 57;
+	private static final int HC_MILK = 14739;
+	private static final int HC_MILK_COW_SCROLL = 14724;
+	private static final int HC_HEAD_MILK_COW_SCROLL = 14725;
+	private static final int HC_GLOOM_MILK_COW_SCROLL = 14725;
+	private static final int HC_GLOOM_HEAD_MILK_COW_SCROLL = 14725;
+	private static final int BULK = 13189;
+	private static final int HEAD_BULK = 13190;
+	
 	@Override
 	public final String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(QN);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -77,19 +74,19 @@ public class HollyCow extends QuestJython
 		}
 		return htmltext;
 	}
-
+	
 	@Override
 	public final String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(QN);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
 		}
-
+		
 		String htmltext = "";
 		int chance = st.getInt("chance");
-
+		
 		if (npc.getNpcId() == FARMER)
 		{
 			if (event.equalsIgnoreCase("getscroll"))
@@ -116,12 +113,12 @@ public class HollyCow extends QuestJython
 			}
 			else if (FunEvents.HC_STARTED)
 			{
-				//	Milk Cow - finished
+				// Milk Cow - finished
 				if (npc.getNpcId() == MILK_COW)
 				{
 					if (event.equalsIgnoreCase("feed"))
 					{
-						if (chance >= 0 && chance < 6)
+						if ((chance >= 0) && (chance < 6))
 						{
 							switch (chance)
 							{
@@ -234,12 +231,12 @@ public class HollyCow extends QuestJython
 						}
 					}
 				}
-				//	Head Milk Cow
+				// Head Milk Cow
 				if (npc.getNpcId() == HEAD_MILK_COW)
 				{
 					if (event.equalsIgnoreCase("feed"))
 					{
-						if (chance >= 0 && chance < 6)
+						if ((chance >= 0) && (chance < 6))
 						{
 							switch (chance)
 							{
@@ -352,12 +349,12 @@ public class HollyCow extends QuestJython
 						}
 					}
 				}
-				//	Gloom Milk Cow - finished
+				// Gloom Milk Cow - finished
 				if (npc.getNpcId() == GLOOM_MILK_COW)
 				{
 					if (event.equalsIgnoreCase("feed"))
 					{
-						if (chance >= 0 && chance < 6)
+						if ((chance >= 0) && (chance < 6))
 						{
 							switch (chance)
 							{
@@ -470,12 +467,12 @@ public class HollyCow extends QuestJython
 						}
 					}
 				}
-				//	Gloom Head Milk Cow
+				// Gloom Head Milk Cow
 				if (npc.getNpcId() == GLOOM_HEAD_MILK_COW)
 				{
 					if (event.equalsIgnoreCase("feed"))
 					{
-						if (chance >= 0 && chance < 6)
+						if ((chance >= 0) && (chance < 6))
 						{
 							switch (chance)
 							{
@@ -592,11 +589,11 @@ public class HollyCow extends QuestJython
 		}
 		return htmltext;
 	}
-
+	
 	@Override
 	public final String onKill(L2Npc npc, L2PcInstance player, boolean isPet)
 	{
-		QuestState st = player.getQuestState(QN);
+		QuestState st = player.getQuestState(getName());
 		if (st.getState() != State.STARTED)
 		{
 			return super.onKill(npc, player, isPet);
@@ -607,7 +604,7 @@ public class HollyCow extends QuestJython
 		}
 		else
 		{
-			//BULK		
+			// BULK
 			if (npc.getNpcId() == BULK)
 			{
 				int random_prize = Rnd.get(1, 10);
@@ -621,28 +618,36 @@ public class HollyCow extends QuestJython
 					case 4:
 					case 5:
 						if (Rnd.get(10) > 5)
+						{
 							st.giveItems(HC_MILK_COW_SCROLL, 1);
+						}
 						break;
 					case 6:
 					case 7:
 					case 8:
 						if (Rnd.get(10) > 5)
+						{
 							st.giveItems(HC_HEAD_MILK_COW_SCROLL, 1);
+						}
 						break;
 					case 9:
 						if (Rnd.get(10) > 5)
+						{
 							st.giveItems(HC_GLOOM_MILK_COW_SCROLL, 1);
+						}
 						break;
 					case 10:
 						if (Rnd.get(10) > 5)
+						{
 							st.giveItems(HC_GLOOM_HEAD_MILK_COW_SCROLL, 1);
+						}
 						break;
 					default:
 						break;
 				}
 				npc.deleteMe();
 			}
-			//Head BULK
+			// Head BULK
 			if (npc.getNpcId() == HEAD_BULK)
 			{
 				int random_prize = Rnd.get(1, 10);
@@ -656,21 +661,29 @@ public class HollyCow extends QuestJython
 					case 4:
 					case 5:
 						if (Rnd.get(10) > 5)
+						{
 							st.giveItems(HC_MILK_COW_SCROLL, 2);
+						}
 						break;
 					case 6:
 					case 7:
 					case 8:
 						if (Rnd.get(10) > 5)
+						{
 							st.giveItems(HC_HEAD_MILK_COW_SCROLL, 2);
+						}
 						break;
 					case 9:
 						if (Rnd.get(10) > 5)
+						{
 							st.giveItems(HC_GLOOM_MILK_COW_SCROLL, 1);
+						}
 						break;
 					case 10:
 						if (Rnd.get(10) > 5)
+						{
 							st.giveItems(HC_GLOOM_HEAD_MILK_COW_SCROLL, 1);
+						}
 						break;
 					default:
 						break;
@@ -680,17 +693,17 @@ public class HollyCow extends QuestJython
 		}
 		return super.onKill(npc, player, isPet);
 	}
-
+	
 	public HollyCow(int questId, String name, String descr)
 	{
 		super(questId, name, descr);
-
-		//  Farmer Npc
+		
+		// Farmer Npc
 		addStartNpc(FARMER);
 		addFirstTalkId(FARMER);
 		addTalkId(FARMER);
-
-		//Npc's for eat
+		
+		// Npc's for eat
 		addStartNpc(MILK_COW);
 		addFirstTalkId(MILK_COW);
 		addTalkId(MILK_COW);
@@ -703,16 +716,18 @@ public class HollyCow extends QuestJython
 		addStartNpc(GLOOM_HEAD_MILK_COW);
 		addFirstTalkId(GLOOM_HEAD_MILK_COW);
 		addTalkId(GLOOM_HEAD_MILK_COW);
-
+		
 		// Mob kill
 		addKillId(BULK);
 		addKillId(HEAD_BULK);
 	}
-
+	
 	public static void main(String[] args)
 	{
-		new HollyCow(-1,QN,"events");
+		new HollyCow(-1, HollyCow.class.getSimpleName(), "events");
 		if (FunEvents.HC_STARTED)
+		{
 			_log.info("Event System: Holly Cow Event loaded ...");
+		}
 	}
 }

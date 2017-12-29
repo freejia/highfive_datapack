@@ -23,14 +23,11 @@ import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.util.Rnd;
 
 /**
- * @Fixed by L2Ps Team www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class AprilFools extends Quest
 {
-	private static final String qn = "AprilFools";
-	
 	private static final int April_Npc = 32639;
-	
 	private static final String start = "start.htm";
 	private static final String good = "good.htm";
 	private static final String bad = "bad.htm";
@@ -68,7 +65,7 @@ public class AprilFools extends Quest
 	@Override
 	public final String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -88,7 +85,7 @@ public class AprilFools extends Quest
 	@Override
 	public final String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -229,7 +226,7 @@ public class AprilFools extends Quest
 	@Override
 	public final String onKill(L2Npc npc, L2PcInstance player, boolean isPet)
 	{
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		if (st == null)
 		{
 			st = newQuestState(player);
@@ -263,7 +260,7 @@ public class AprilFools extends Quest
 	
 	public static void main(String[] args)
 	{
-		new AprilFools(-1, qn, "events");
+		new AprilFools(-1, AprilFools.class.getSimpleName(), "events");
 		if (FunEvents.AP_STARTED)
 		{
 			_log.warning("Event System: April Fools Day Event loaded ...");

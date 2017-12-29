@@ -21,7 +21,7 @@ import javolution.util.FastMap;
 import com.l2jserver.gameserver.datatables.SkillTable;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.actor.instance.L2ServitorInstance;
+import com.l2jserver.gameserver.model.actor.instance.L2PetInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -989,6 +989,35 @@ public class PcBangPoint extends Quest
 			-3648,
 			120
 		}); // Timak Outpost 110 points
+		
+		TELEPORTERS.put("TELE_93", new int[]
+		{
+			-122425,
+			73348,
+			-2872,
+			40
+		}); // Stronghold 1 40 points
+		TELEPORTERS.put("TELE_94", new int[]
+		{
+			-116934,
+			46616,
+			368,
+			80
+		}); // Stronghold 2 80 points
+		TELEPORTERS.put("TELE_95", new int[]
+		{
+			-85800,
+			37066,
+			-2053,
+			50
+		}); // Stronghold 3 50 points
+		TELEPORTERS.put("TELE_96", new int[]
+		{
+			-74045,
+			51984,
+			-3681,
+			70
+		}); // Isle of Soul Harbor 70 points
 	}
 	
 	@Override
@@ -1027,7 +1056,7 @@ public class PcBangPoint extends Quest
 		}
 		else if (PETSKILL.containsKey(event))
 		{
-			if ((player.getSummon() == null) || !(player.getSummon() instanceof L2ServitorInstance))
+			if ((player.getSummon() == null) || !(player.getSummon() instanceof L2PetInstance))
 			{
 				htmltext = "nosummon.htm";
 			}
@@ -1120,7 +1149,7 @@ public class PcBangPoint extends Quest
 		}
 		else if (event.equalsIgnoreCase("pet_warrior"))
 		{
-			if ((player.getSummon() == null) || !(player.getSummon() instanceof L2ServitorInstance))
+			if ((player.getSummon() == null) || !(player.getSummon() instanceof L2PetInstance))
 			{
 				htmltext = "nosummon.htm";
 			}
@@ -1184,7 +1213,7 @@ public class PcBangPoint extends Quest
 		}
 		else if (event.equalsIgnoreCase("pet_mage"))
 		{
-			if ((player.getSummon() == null) || !(player.getSummon() instanceof L2ServitorInstance))
+			if ((player.getSummon() == null) || !(player.getSummon() instanceof L2PetInstance))
 			{
 				htmltext = "nosummon.htm";
 			}

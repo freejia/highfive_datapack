@@ -124,10 +124,8 @@ public class FreyaKegonSolo extends Quest
 		addTalkId(KROON);
 		addTalkId(TAROON);
 		addTalkId(KEGOR_IN_CAVE);
-		
 		addKillId(KEGOR_IN_CAVE);
 		addKillId(MONSTER);
-		
 		addSpawnId(KEGOR_IN_CAVE);
 		addSpawnId(MONSTER);
 		

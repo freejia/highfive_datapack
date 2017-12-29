@@ -31,7 +31,7 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.Util;
 
 /**
- * @Fixed by L2Ps Team www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class FreyaCelebration extends Quest
 {
@@ -197,6 +197,6 @@ public class FreyaCelebration extends Quest
 	
 	public static void main(String[] args)
 	{
-		new FreyaCelebration(-1, "FreyaCelebration", "events");
+		new FreyaCelebration(-1, FreyaCelebration.class.getSimpleName(), "events");
 	}
 }

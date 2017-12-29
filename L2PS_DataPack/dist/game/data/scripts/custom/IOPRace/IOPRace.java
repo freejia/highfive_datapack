@@ -138,6 +138,6 @@ public class IOPRace extends Quest
 	
 	public static void main(String[] args)
 	{
-		new IOPRace(-1, "IOPRace", "custom");
+		new IOPRace(-1, IOPRace.class.getSimpleName(), "custom");
 	}
 }

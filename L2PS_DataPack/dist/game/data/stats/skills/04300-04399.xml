@@ -459,15 +459,20 @@
 		</for>
 	</skill>
 	<skill id="4334" levels="1" name="SSQ Cancel">
-		<!-- Confirmed CT2.5 -->
-		<set name="affectRange" val="2000" />
+		<!-- High Five Skill -->
 		<set name="castRange" val="1000" />
-		<set name="effectRange" val="1500" />
+		<set name="effectRange" val="2000" />
+		<set name="hitTime" val="6000" />
+		<set name="isMagic" val="1" /> <!-- Magic Skill -->
+		<set name="maxNegated" val="5" />
 		<set name="magicLvl" val="99" />
+		<set name="mpConsume" val="62" />
+		<set name="mpInitialConsume" val="16" />
+		<set name="reuseDelay" val="15000" />
 		<set name="operateType" val="A1" />
-		<set name="targetType" val="AREA" />
+		<set name="targetType" val="ONE" />
 		<for>
-			<effect name="CancelAll" noicon="1" val="0" />
+			<effect name="Cancel" noicon="1" val="0" effectPower="30" />
 		</for>
 	</skill>
 	<skill id="4335" levels="1" name="Sacred Attack">

@@ -267,7 +267,9 @@
 		<table name="#baseCritRate"> 6 8 10 </table>
 		<table name="#magicLvl"> 85 85 90 </table>
 		<table name="#power"> 15835 19096 16176 </table>
-		<set name="affectRange" val="150" />
+		<set name="reuseDelay" val="40000" />
+		<set name="affectLimit" val="3-6" />
+		<set name="affectRange" val="200" />
 		<set name="baseCritRate" val="#baseCritRate" />
 		<set name="castRange" val="150" />
 		<set name="coolTime" val="1200" />
@@ -316,6 +318,8 @@
 		<set name="abnormalLvl" val="1" />
 		<set name="abnormalTime" val="20" />
 		<set name="abnormalType" val="paralyze" />
+		<set name="reuseDelay" val="40000" />
+		<set name="affectLimit" val="3-6" />
 		<set name="affectRange" val="200" />
 		<set name="castRange" val="500" />
 		<set name="coolTime" val="1000" />
@@ -362,6 +366,8 @@
 		<table name="#power"> 607 754 </table>
 		<table name="#skillRadius"> 700 1000 </table>
 		<set name="affectRange" val="#skillRadius" />
+		<set name="reuseDelay" val="40000" />
+		<set name="affectLimit" val="3-6" />
 		<set name="coolTime" val="1000" />
 		<set name="element" val="5" /> <!-- Dark -->
 		<set name="elementPower" val="180" />
@@ -377,6 +383,9 @@
 		<!-- Confirmed CT2.5 -->
 		<!-- Frintezza Skills -->
 		<set name="absorbPart" val="0.8" />
+		<set name="reuseDelay" val="40000" />
+		<set name="affectLimit" val="3-6" />
+		<set name="affectRange" val="200" />
 		<set name="affectRange" val="1000" />
 		<set name="coolTime" val="4000" />
 		<set name="element" val="5" /> <!-- Dark -->

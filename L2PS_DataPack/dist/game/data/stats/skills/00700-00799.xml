@@ -1359,6 +1359,7 @@
 		<set name="SSBoost" val="2.0" />
 		<set name="targetType" val="AURA" />
 		<set name="trait" val="DEATH" />
+		<set name="pvp" val="true" />
 		<cond msgId="113" addName="1">
 			<and>
 				<using kind="Sword,Big Sword,Blunt,Big Blunt" />
@@ -1716,6 +1717,7 @@
 		<set name="skillType" val="CHARGEDAM" />
 		<set name="SSBoost" val="2.0" />
 		<set name="targetType" val="ONE" />
+		<set name="pvp" val="true" />
 		<cond msgId="113" addName="1">
 			<and>
 				<using kind="Dual Fist" />
@@ -2112,6 +2114,7 @@
 		<set name="SSBoost" val="2.0" />
 		<set name="targetType" val="AURA" />
 		<set name="trait" val="PARALYZE" />
+		<set name="pvp" val="true" />
 		<for>
 			<effect name="ChanceSkillTrigger" abnormalTime="5" val="0" triggeredId="6092" chanceType="ON_EXIT" effectPower="50" abnormalLvl="1" abnormalType="paralyze">
 				<mul order="0x30" stat="pAtkSpd" val="0.5" />

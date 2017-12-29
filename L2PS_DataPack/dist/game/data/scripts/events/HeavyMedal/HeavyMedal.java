@@ -21,8 +21,7 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 
 /**
- * @Fixed by L2Ps Team
- * www.l2ps.tode.cz
+ * @author RobíkBobík
  */
 public class HeavyMedal extends Quest
 {
@@ -34,11 +33,17 @@ public class HeavyMedal extends Quest
 	
 	private final static int[] MEDALS =
 	{
-		5, 10, 20, 40
+		5,
+		10,
+		20,
+		40
 	};
 	private final static int[] BADGES =
 	{
-		6399, 6400, 6401, 6402
+		6399,
+		6400,
+		6401,
+		6402
 	};
 	
 	private static final Location[] _spawns_winnie =
@@ -230,6 +235,6 @@ public class HeavyMedal extends Quest
 	
 	public static void main(String[] args)
 	{
-		new HeavyMedal(-1, "HeavyMedal", "events");
+		new HeavyMedal(-1, HeavyMedal.class.getSimpleName(), "events");
 	}
 }

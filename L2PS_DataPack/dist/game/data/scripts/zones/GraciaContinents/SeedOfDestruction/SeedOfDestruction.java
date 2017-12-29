@@ -37,7 +37,6 @@ import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.L2Summon;
 import com.l2jserver.gameserver.model.actor.instance.L2DoorInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.effects.L2Effect;
 import com.l2jserver.gameserver.model.entity.Instance;
 import com.l2jserver.gameserver.model.instancezone.InstanceWorld;
 import com.l2jserver.gameserver.model.quest.Quest;
@@ -4550,7 +4549,6 @@ public class SeedOfDestruction extends Quest
 				player.sendMessage("Welcome to Seed of Destruction. Time to finish the resort is 130 minutes.");
 				InstanceManager.getInstance().setInstanceTime(player.getObjectId(), INSTANCEID, (System.currentTimeMillis()));
 				teleportplayer(player, teleto, (SODWorld) world);
-				removeBuffs(player);
 				world.addAllowed(player.getObjectId());
 			}
 			else
@@ -4560,7 +4558,6 @@ public class SeedOfDestruction extends Quest
 					player.sendMessage("Welcome to Seed of Destruction. Time to finish the resort is 130 minutes.");
 					InstanceManager.getInstance().setInstanceTime(channelMember.getObjectId(), INSTANCEID, (System.currentTimeMillis()));
 					teleportplayer(channelMember, teleto, (SODWorld) world);
-					removeBuffs(channelMember);
 					world.addAllowed(channelMember.getObjectId());
 				}
 			}
@@ -4586,39 +4583,6 @@ public class SeedOfDestruction extends Quest
 		player.setInstanceId(teleto.instanceId);
 		player.teleToLocation(teleto.x, teleto.y, teleto.z);
 		return;
-	}
-	
-	private static final void removeBuffs(L2Character ch)
-	{
-		for (L2Effect e : ch.getAllEffects())
-		{
-			if (e == null)
-			{
-				continue;
-			}
-			L2Skill skill = e.getSkill();
-			if (skill.isDebuff() || skill.isStayAfterDeath())
-			{
-				continue;
-			}
-			e.exit();
-		}
-		if (ch.getSummon() != null)
-		{
-			for (L2Effect e : ch.getSummon().getAllEffects())
-			{
-				if (e == null)
-				{
-					continue;
-				}
-				L2Skill skill = e.getSkill();
-				if (skill.isDebuff() || skill.isStayAfterDeath())
-				{
-					continue;
-				}
-				e.exit();
-			}
-		}
 	}
 	
 	private void teleportplayer(L2PcInstance player, teleCoord teleto, SODWorld world)

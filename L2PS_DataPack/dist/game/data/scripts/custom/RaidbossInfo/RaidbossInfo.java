@@ -40,8 +40,6 @@ import com.l2jserver.gameserver.util.Util;
  */
 public class RaidbossInfo extends Quest
 {
-	private static final String qn = "RaidbossInfo";
-	
 	private static final int[] NPC =
 	{
 		31729,
@@ -170,7 +168,7 @@ public class RaidbossInfo extends Quest
 	{
 		String htmltext = event;
 		
-		QuestState st = player.getQuestState(qn);
+		QuestState st = player.getQuestState(getName());
 		
 		if (st == null)
 		{
@@ -222,6 +220,6 @@ public class RaidbossInfo extends Quest
 	
 	public static void main(String args[])
 	{
-		new RaidbossInfo(-1, qn, "custom");
+		new RaidbossInfo(-1, RaidbossInfo.class.getSimpleName(), "custom");
 	}
 }

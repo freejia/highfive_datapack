@@ -1,0 +1,24 @@
+<html>
+<title>Bug Report Manager</title>
+<body>
+<center>
+<table border="0" height=10 bgcolor="444444" width=240>
+<tr><td align=center><font color="00FFFF">Hello %player%.</font></td></tr>
+<tr><td align=center><font color="00FFFF">There are no Gms online</font></td></tr>
+<tr><td align=center><font color="00FFFF">and you want to report something?</font></td></tr>
+<tr><td align=center><font color="00FFFF">Now it is possible.</font></td></tr>
+</table>
+<br>
+<table width=250>
+<tr>
+<td><font color="LEVEL">Select Report Type:</font></td>
+<td><combobox width=105 var=type list=General;Fatal;Misuse;Balance;Skills;Armor;Donater;Other></td>
+</tr>
+</table>
+<br>
+<multiedit var="msg" width=250 height=50><br><br>
+<button value="Report It" action="bypass -h Quest BugReport report $type $msg" width=128 height=26 back="L2UI_ct1.button_df" fore="L2UI_ct1.button_df"></td>
+<br>
+<table cellspacing="-2"><tr><td><img src="banner.akamanah1" width=128 height=128></td><td><img src="banner.akamanah2" width=128 height=128></td></tr></table>
+</center>
+</body></html>
