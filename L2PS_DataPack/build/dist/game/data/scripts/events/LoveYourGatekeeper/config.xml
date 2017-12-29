@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event name="Love Your Gatekeeper" active="27 02 2008-28 02 2020" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/eventConfig.xsd">
+	<spawnlist>
+		<add npc="32477" x="-80707" y="151191" z="-3042" heading="28672" />
+		<add npc="32477" x="-83965" y="150134" z="-3127" heading="4096" />
+		<add npc="32477" x="-82733" y="151658" z="-3130" heading="46943" />
+		<add npc="32477" x="-13025" y="122929" z="-3115" heading="0" />
+		<add npc="32477" x="-14022" y="121824" z="-2987" heading="32768" />
+		<add npc="32477" x="-14772" y="123624" z="-3115" heading="8192" />
+		<add npc="32477" x="18129" y="145244" z="-3054" heading="7400" />
+		<add npc="32477" x="19205" y="144273" z="-3094" heading="32768" />
+		<add npc="32477" x="19561" y="145775" z="-3086" heading="47999" />
+		<add npc="32477" x="17482" y="170335" z="-3504" heading="30000" />
+		<add npc="32477" x="44161" y="-48647" z="-795" heading="32999" />
+		<add npc="32477" x="44356" y="-47637" z="-795" heading="49167" />
+		<add npc="32477" x="79818" y="55450" z="-1558" heading="0" />
+		<add npc="32477" x="83323" y="55725" z="-1523" heading="32768" />
+		<add npc="32477" x="80984" y="54413" z="-1523" heading="32768" />
+		<add npc="32477" x="83358" y="149223" z="-3400" heading="32768" />
+		<add npc="32477" x="82269" y="148680" z="-3468" heading="0" />
+		<add npc="32477" x="81617" y="148660" z="-3465" heading="32768" />
+		<add npc="32477" x="81682" y="145761" z="-3534" heading="32768" />
+		<add npc="32477" x="117400" y="76682" z="-2692" heading="38000" />
+		<add npc="32477" x="119634" y="76965" z="-2273" heading="40960" />
+		<add npc="32477" x="111585" y="221011" z="-3544" heading="16384" />
+		<add npc="32477" x="107876" y="218200" z="-3673" heading="0" />
+		<add npc="32477" x="114856" y="220084" z="-3630" heading="32768" />
+		<add npc="32477" x="147962" y="-58055" z="-2979" heading="49000" />
+		<add npc="32477" x="147358" y="-56493" z="-2779" heading="11500" />
+		<add npc="32477" x="147120" y="27312" z="-2192" heading="40960" />
+		<add npc="32477" x="148017" y="25672" z="-2011" heading="16384" />
+		<add npc="32477" x="87702" y="-142190" z="-1339" heading="44000" />
+		<add npc="32477" x="87557" y="-140657" z="-1542" heading="20476" />
+		<add npc="32477" x="115876" y="76354" z="-2711" heading="58999" />
+	</spawnlist>
+	<messages>
+		<add type="onEnd" text="Love Your Gatekeeper: Event end!" />
+		<add type="onEnter" text="Love Your Gatekeeper: Event ongoing!" />
+	</messages>
+</event>

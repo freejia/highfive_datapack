@@ -1,0 +1,51 @@
+<html><title>L2PS admin menu</title><body>
+<center>
+<table width="270" bgcolor="000033">
+<tr>
+<td><button value="Main" action="bypass -h admin_admin" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td><button value="Char" action="bypass -h admin_admin6" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td><button value="Game" action="bypass -h admin_admin2" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td><button value="GM" action="bypass -h admin_admin7" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+</tr>
+<tr>
+<td><button value="GM Shop" action="bypass -h admin_gmshop" width=65 height=21 back="L2UI_ct1.button_df" fore="L2UI_ct1.button_df"></td>
+<td><button value="Events" action="bypass -h admin_event_menu" width=65 height=21 back="L2UI_ct1.button_df" fore="L2UI_ct1.button_df"></td>
+<td><button value="Enhance" action="bypass -h admin_enchant" width=65 height=21 back="L2UI_ct1.button_df" fore="L2UI_ct1.button_df"></td>
+<td><button value="Server" action="bypass -h admin_admin4" width=65 height=21 back="L2UI_ct1.button_df" fore="L2UI_ct1.button_df"></td>
+</tr>
+</table><br>
+<br>
+<br>
+<br>
+<table width=240 bgcolor="666666">
+<tr>
+<td>Clan Name:</td><td>%clan_name%</td>
+</tr>
+<tr>
+<td>Leader:</td><td>%clan_leader%</td>
+</tr>
+<tr>
+<td>Level:</td><td>%clan_level%</td>
+</tr>
+<tr>
+<td>Has Castle:</td><td>%clan_has_castle%</td>
+</tr>
+<tr>
+<td>Has Clan Hall:</td><td>%clan_has_clanhall%</td>
+</tr>
+<tr>
+<td>Has Fortress:</td><td>%clan_has_fortress%</td>
+</tr>
+<tr>
+<td>Rep. Points:</td><td>%clan_points%</td>
+</tr>
+<tr>
+<td>Players Count:</td><td>%clan_players_count%</td>
+</tr>
+<tr>
+<td>Ally :</td><td>%clan_ally%</td>
+</tr>
+<tr>
+<td>Change Leader:</td><td><a action="bypass -h admin_clan_changeleader %current_player_objectId%">%current_player_name%</a></td>
+</tr>
+</table>
