@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/skills.xsd">
+	<skill id="10000" levels="1" name="Mana Drug">
+		<set name="abnormalLvl" val="3" />
+		<set name="abnormalTime" val="15" />
+		<set name="abnormalType" val="mp_recover" />
+		<set name="displayId" val="2288" />
+		<set name="isMagic" val="2" /> <!-- Static Skill -->
+		<set name="itemConsumeId" val="726" />
+		<set name="itemConsumeCount" val="1" />
+		<set name="operateType" val="A2" />
+		<set name="reuseDelay" val="10000" />
+		<set name="skillType" val="BUFF" />
+		<set name="targetType" val="SELF" />
+		<for>
+			<effect count="7" name="ManaHealOverTime" abnormalTime="2" val="100" abnormalLvl="3" abnormalType="mp_recover" />
+		</for>
+	</skill>
+	<skill id="10001" levels="1" name="Mana Potion">
+		<set name="displayId" val="2288" />
+		<set name="isMagic" val="2" /> <!-- Static Skill -->
+		<set name="itemConsumeId" val="728" />
+		<set name="itemConsumeCount" val="1" />
+		<set name="magicLvl" val="1" />
+		<set name="operateType" val="A1" />
+		<set name="reuseDelay" val="500" />
+		<set name="targetType" val="SELF" />
+		<for>
+			<effect name="ManaHeal" noicon="1" val="100" />
+		</for>
+	</skill>
+	<skill id="10002" levels="1" name="Custom Trap skill">
+		<!-- Use this skill if you want to handle trap activation in scripts(example Seed of Destruction Spawn Traps) -->
+		<set name="targetType" val="AURA" />
+		<set name="isMagic" val="1" /> <!-- Magic Skill -->
+		<set name="operateType" val="P" />
+	</skill>
+	<!-- Retail Support for some Bosses-->
+	<skill id="10003" levels="1" name="Debuff Immunity">
+		<set name="magicLvl" val="75" />
+		<set name="operateType" val="P" />
+		<set name="targetType" val="SELF" />
+		<for>
+			<set order="0x08" stat="debuffImmunity" val="1" />
+		</for>
+	</skill>
+	<skill id="10004" levels="1" name="Bottle of Full Soul">
+		<!-- Confirmed CT2.5 -->
+		<set name="isMagic" val="2" /> <!-- Static Skill -->
+		<set name="itemConsumeCount" val="1" />
+		<set name="magicLvl" val="1" />
+		<set name="operateType" val="A1" />
+		<set name="targetType" val="SELF" />
+		<for>
+			<effect name="FocusSouls" noicon="1" val="10" />
+		</for>
+	</skill>
+</list>

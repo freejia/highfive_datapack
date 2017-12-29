@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list enabled="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/zones.xsd">
+		<zone name="AntQueenZone" type="AntQueenZone" shape="NPoly" minZ="-7000" maxZ="7000">
+		<node X="-20435" Y="183153" />
+		<node X="-22857" Y="183349" />
+		<node X="-22330" Y="179067" />
+		<node X="-20802" Y="179079" />
+	</zone>
+</list>
